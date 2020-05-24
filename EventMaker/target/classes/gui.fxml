@@ -1,0 +1,996 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="850.0" prefWidth="1310.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eventviewer.Controller">
+  <children>
+      <ImageView fitHeight="25.0" fitWidth="1313.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5">
+         <image>
+            <Image url="@line.png" />
+         </image>
+         <VBox.margin>
+            <Insets bottom="15.0" top="10.0" />
+         </VBox.margin>
+      </ImageView>
+      <GridPane fx:id="OptionsBar" prefHeight="295.0" prefWidth="1313.0" style="-fx-background-color: black;">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="98.0" minHeight="40.0" prefHeight="83.0" />
+            <RowConstraints maxHeight="131.0" minHeight="10.0" prefHeight="131.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <HBox alignment="BOTTOM_LEFT" prefHeight="164.0" prefWidth="1313.0" GridPane.rowIndex="1">
+               <children>
+                  <HBox prefHeight="124.0" prefWidth="1266.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox prefHeight="100.0" prefWidth="602.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="147.0" prefWidth="592.0" spacing="10.0">
+                                 <children>
+                                    <Label prefHeight="25.0" prefWidth="65.0" text="Flavour" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextArea fx:id="textFlav" prefHeight="106.0" prefWidth="470.0" style="-fx-border-width: 3px;" styleClass="flavor" wrapText="true" HBox.hgrow="NEVER">
+                                       <HBox.margin>
+                                          <Insets top="10.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="System Italic" size="16.0" />
+                                       </font>
+                                    </TextArea>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <Label fx:id="lblTooLong" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="607.0" text="Probably too long!" textFill="RED" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font></Label>
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_RIGHT" prefHeight="165.0" prefWidth="373.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="82.0" prefWidth="452.0" translateX="-10.0">
+                                 <children>
+                                    <Label prefHeight="25.0" prefWidth="75.0" text="Art file" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <padding>
+                                          <Insets left="12.0" />
+                                       </padding>
+                                    </Label>
+                                    <TextField fx:id="txtPic" alignment="CENTER_RIGHT" editable="false">
+                                       <cursor>
+                                          <Cursor fx:constant="DEFAULT" />
+                                       </cursor></TextField>
+                                    <Button fx:id="btnLoadPic" mnemonicParsing="false" prefHeight="60.0" prefWidth="127.0" style="-fx-background-color: black; -fx-text-fill: white; -fx-border-color: white; -fx-border-width: 3px;" styleClass="loadPic" text="Load art">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></Button>
+                                 </children>
+                                 <padding>
+                                    <Insets top="20.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="45.0" prefWidth="431.0" spacing="15.0">
+                                 <children>
+                                    <CheckBox fx:id="chkBigArt" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Big art" textAlignment="CENTER" textFill="WHITE">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </CheckBox>
+                                    <CheckBox fx:id="chkWavy" mnemonicParsing="false" text="Wavy art" textFill="WHITE">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <Slider fx:id="sldWavy" blockIncrement="0.1" disable="true" max="1.0" prefWidth="100.0" value="0.5" />
+                                    <Label fx:id="lblWavyVal" disable="true" text="0.5" textFill="WHITE" translateX="-10.0">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <Label fx:id="lblImgWarn" contentDisplay="CENTER" prefHeight="17.0" prefWidth="432.0" style="-fx-alignment: center;" text="Warning" textFill="RED" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                           </children>
+                           <padding>
+                              <Insets left="-60.0" top="20.0" />
+                           </padding>
+                        </VBox>
+                        <HBox alignment="CENTER" maxHeight="150.0" minHeight="150.0" prefHeight="10.0" prefWidth="320.0" style="-fx-border-color: white; -fx-border-width: 3px; -fx-border-insets: -10; -fx-translate-y: 10;" translateX="-30.0" translateY="-5.0">
+                           <children>
+                              <ImageView fx:id="imgArt" fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" scaleX="1.9" scaleY="1.9" smooth="false" translateY="40.0" HBox.hgrow="NEVER">
+                                 <image>
+                                    <Image url="@admirer.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="20.0" />
+                                 </HBox.margin>
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                           </children>
+                           <HBox.margin>
+                              <Insets bottom="5.0" top="10.0" />
+                           </HBox.margin>
+                        </HBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="10.0" right="25.0" />
+                     </HBox.margin>
+                  </HBox>
+               </children>
+            </HBox>
+            <GridPane prefHeight="105.0" prefWidth="1238.0" vgap="5.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="0.0" prefWidth="0.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="50.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="50.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="600.0" minWidth="10.0" prefWidth="50.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="60.0" minHeight="0.0" prefHeight="15.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="60.0" minHeight="0.0" prefHeight="45.0" valignment="CENTER" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextField fx:id="textTitle" alignment="BOTTOM_LEFT" prefHeight="0.0" prefWidth="400.0" styleClass="silver" stylesheets="@styles.css" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="textDesc" alignment="BOTTOM_LEFT" maxHeight="15.0" prefHeight="0.0" prefWidth="700.0" styleClass="silver" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </TextField>
+                  <Label alignment="BOTTOM_LEFT" maxHeight="15.0" prefHeight="25.0" prefWidth="196.0" text="Description" textFill="WHITE" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="BOTTOM_LEFT" prefHeight="26.0" prefWidth="149.0" stylesheets="@styles.css" text="Title" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="25.0" prefWidth="198.0" text="Location" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                        </Label>
+                        <ComboBox fx:id="cmbLocation" prefHeight="25.0" prefWidth="308.0">
+                           <HBox.margin>
+                              <Insets right="12.0" />
+                           </HBox.margin></ComboBox>
+                     </children>
+                  </HBox>
+                  <StackPane fx:id="helpArea" maxHeight="68.0" prefHeight="68.0" prefWidth="455.0" style="-fx-border-color: white; -fx-border-width: 4;" translateY="-5.0" GridPane.columnIndex="3">
+                     <children>
+                        <TextArea fx:id="helpAreaTxt" maxHeight="96.0" maxWidth="428.0" prefHeight="80.0" prefWidth="361.0" promptText="Help will appear here..." style="-fx-max-height: 80; -fx-background-color: black; -fx-border-width: 3px; -fx-border-color: white;" styleClass="helpArea" stylesheets="@styles.css" translateX="30.0" translateY="-40.0" wrapText="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets top="2.0" />
+                           </StackPane.margin>
+                           <opaqueInsets>
+                              <Insets right="80.0" />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets right="60.0" />
+                           </padding>
+                        </TextArea>
+                        <ImageView fitHeight="150.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true" scaleX="0.3" scaleY="0.3" smooth="false" translateX="-210.0" translateY="-45.0">
+                           <image>
+                              <Image url="@help2.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <GridPane.margin>
+                        <Insets left="50.0" />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets bottom="-90.0" />
+                     </padding>
+                  </StackPane>
+                  <ImageView fx:id="btnHideHelp" fitHeight="25.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" smooth="false" translateX="480.0" translateY="-30.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@CLOSE.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+               <GridPane.margin>
+                  <Insets left="50.0" right="25.0" />
+               </GridPane.margin>
+            </GridPane>
+         </children>
+         <padding>
+            <Insets bottom="20.0" top="25.0" />
+         </padding>
+      </GridPane>
+      <HBox alignment="CENTER" prefHeight="28.0" prefWidth="1313.0">
+         <children>
+            <ImageView fx:id="imgGuiArt" fitHeight="150.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" smooth="false" translateY="-3.0">
+               <image>
+                  <Image url="@art.png" />
+               </image>
+               <HBox.margin>
+                  <Insets right="-5.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fx:id="imgGuiArt3" fitHeight="150.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+               <image>
+                  <Image url="@art3.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgGuiArt2" fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" smooth="false" translateY="15.0">
+               <image>
+                  <Image url="@art2.png" />
+               </image>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fx:id="imgGuiArt5" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logo.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgGuiArt4" fitHeight="150.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" smooth="false" translateX="-14.0">
+               <image>
+                  <Image url="@art4.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" contentDisplay="TOP" prefHeight="26.0" prefWidth="179.0" text="Available options" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Label>
+            <ComboBox fx:id="cmbOptions" prefHeight="35.0" prefWidth="50.0" promptText="2" />
+            <Button fx:id="btnCLear" mnemonicParsing="false" style="-fx-background-color: black; -fx-text-fill: white; -fx-border-color: white; -fx-border-width: 3px;" styleClass="loadPic" stylesheets="@styles.css" text="Clear all input">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets right="420.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox fx:id="optionsBar" alignment="CENTER" prefHeight="459.0" prefWidth="1313.0" style="-fx-spacing: 8px;">
+         <children>
+            <VBox fx:id="optionA" alignment="CENTER" prefHeight="406.0" prefWidth="407.0" style="-fx-background-color: black;">
+               <children>
+                  <GridPane>
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="10.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ComboBox fx:id="comboCheckA" nodeOrientation="LEFT_TO_RIGHT" prefHeight="48.0" prefWidth="171.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="-5.0" top="20.0" />
+                           </GridPane.margin></ComboBox>
+                        <Label text="Stat check" textFill="WHITE" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="Choice A text" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtOptionA" alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="281.0" styleClass="silver" stylesheets="@styles.css" translateX="11.0" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin></TextField>
+                     </children>
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </GridPane>
+                  <TabPane prefHeight="297.0" prefWidth="377.0" tabClosingPolicy="UNAVAILABLE">
+                     <tabs>
+                        <Tab closable="false" text="Success">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox alignment="CENTER" layoutY="15.0" prefHeight="257.0" prefWidth="377.0">
+                                       <children>
+                                          <Label contentDisplay="CENTER" text="Success text A" textFill="WHITE">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <TextArea fx:id="txtSuccessA" prefHeight="136.0" prefWidth="377.0" wrapText="true">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </TextArea>
+                                          <Label fx:id="lblAS" alignment="CENTER" prefHeight="17.0" prefWidth="649.0" text="Probably too long!" textFill="RED" visible="false" />
+                                          <GridPane alignment="CENTER" prefHeight="119.0" VBox.vgrow="ALWAYS">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.0" minWidth="10.0" prefWidth="140.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <TextField fx:id="txtRewardA" alignment="CENTER" prefHeight="25.0" prefWidth="155.0" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                                                   <GridPane.margin>
+                                                      <Insets />
+                                                   </GridPane.margin>
+                                                   <padding>
+                                                      <Insets bottom="9.0" />
+                                                   </padding></TextField>
+                                                <Label prefHeight="25.0" prefWidth="97.0" styleClass="smaller" text="Reward" textFill="WHITE" GridPane.hgrow="SOMETIMES">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="cmbRewardsA" prefHeight="48.0" prefWidth="161.0" promptText="ITEM" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" GridPane.valignment="CENTER">
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                </ComboBox>
+                                                <Label styleClass="smaller" text="Extra reward" textFill="WHITE" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label styleClass="smaller" text="Visual effect" textFill="WHITE" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="cmbVisualA" prefHeight="48.0" prefWidth="292.0" promptText="NONE" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                                                <ComboBox fx:id="cmbExtraRewardsA" prefHeight="48.0" prefWidth="196.0" promptText="EXP" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                                                <TextField fx:id="txtExtraRewardA" alignment="CENTER" scaleZ="0.5" stylesheets="@styles.css" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                   <GridPane.margin>
+                                                      <Insets />
+                                                   </GridPane.margin>
+                                                   <padding>
+                                                      <Insets bottom="9.0" />
+                                                   </padding></TextField>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="15.0" right="15.0" top="15.0" />
+                                             </VBox.margin>
+                                          </GridPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="tabFailureA" closable="false" text="Failure">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox alignment="CENTER" layoutY="15.0" prefHeight="257.0" prefWidth="377.0">
+                                       <children>
+                                          <Label contentDisplay="CENTER" text="Failure text B" textFill="WHITE">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <TextArea fx:id="txtFailureA" prefHeight="136.0" prefWidth="377.0" wrapText="true">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </TextArea>
+                                          <Label fx:id="lblAS1" alignment="CENTER" prefHeight="17.0" prefWidth="649.0" text="Probably too long!" textFill="RED" visible="false" />
+                                          <GridPane alignment="CENTER" prefHeight="119.0" VBox.vgrow="ALWAYS">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.0" minWidth="10.0" prefWidth="140.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <TextField fx:id="txtRewardAF" alignment="CENTER" prefHeight="25.0" prefWidth="155.0" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                                                   <GridPane.margin>
+                                                      <Insets />
+                                                   </GridPane.margin>
+                                                   <padding>
+                                                      <Insets bottom="9.0" />
+                                                   </padding>
+                                                </TextField>
+                                                <Label prefHeight="25.0" prefWidth="97.0" styleClass="smaller" text="Reward" textFill="WHITE" GridPane.hgrow="SOMETIMES">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="cmbRewardsAF" prefHeight="48.0" prefWidth="161.0" promptText="ITEM" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" GridPane.valignment="CENTER">
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                </ComboBox>
+                                                <Label styleClass="smaller" text="Extra reward" textFill="WHITE" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label styleClass="smaller" text="Visual effect" textFill="WHITE" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="cmbVisualAF" prefHeight="48.0" prefWidth="292.0" promptText="NONE" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                                                <ComboBox fx:id="cmbExtraRewardsAF" prefHeight="48.0" prefWidth="196.0" promptText="EXP" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                                                <TextField fx:id="txtExtraRewardAF" alignment="CENTER" scaleZ="0.5" stylesheets="@styles.css" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                   <GridPane.margin>
+                                                      <Insets />
+                                                   </GridPane.margin>
+                                                   <padding>
+                                                      <Insets bottom="9.0" />
+                                                   </padding>
+                                                </TextField>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="15.0" right="15.0" top="15.0" />
+                                             </VBox.margin>
+                                          </GridPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                     </tabs>
+                     <VBox.margin>
+                        <Insets left="15.0" right="15.0" top="25.0" />
+                     </VBox.margin>
+                  </TabPane>
+                  <Separator prefWidth="200.0" visible="false">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Separator>
+               </children>
+            </VBox>
+            <VBox fx:id="optionB" alignment="CENTER" prefHeight="406.0" prefWidth="407.0" style="-fx-background-color: black;">
+               <children>
+                  <GridPane>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <ComboBox fx:id="comboCheckB" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="-5.0" top="15.0" />
+                           </GridPane.margin></ComboBox>
+                        <Label text="Stat check" textFill="WHITE" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="Choice B text" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtOptionB" alignment="CENTER_RIGHT" styleClass="silver" stylesheets="@styles.css" translateX="11.0" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></TextField>
+                     </children>
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </GridPane>
+                  <TabPane prefHeight="297.0" prefWidth="377.0" tabClosingPolicy="UNAVAILABLE">
+                     <tabs>
+                        <Tab closable="false" text="Success">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="297.0" prefWidth="377.0">
+                                 <children>
+                                    <VBox alignment="CENTER" layoutY="15.0" prefHeight="257.0" prefWidth="377.0">
+                                       <children>
+                                          <Label contentDisplay="CENTER" text="Success text B" textFill="WHITE">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <TextArea fx:id="txtSuccessB" prefHeight="136.0" prefWidth="377.0" wrapText="true">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </TextArea>
+                                          <Label fx:id="lblBS" alignment="CENTER" prefHeight="17.0" prefWidth="443.0" text="Probably too long!" textFill="RED" visible="false" />
+                                          <GridPane alignment="CENTER">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="140.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <TextField fx:id="txtRewardB" alignment="CENTER" prefHeight="25.0" prefWidth="155.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                                                <Label prefHeight="20.0" prefWidth="101.0" styleClass="smaller" text="Reward" textFill="WHITE" GridPane.hgrow="SOMETIMES">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="cmbRewardsB" prefHeight="25.0" prefWidth="158.0" promptText="REASON" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" GridPane.valignment="CENTER">
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                </ComboBox>
+                                                <Label styleClass="smaller" text="Extra reward" textFill="WHITE" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label styleClass="smaller" text="Visual effect" textFill="WHITE" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="cmbVisualB" prefHeight="25.0" prefWidth="259.0" promptText="WHITEFLASH" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                                                <ComboBox fx:id="cmbExtraRewardsB" prefHeight="25.0" prefWidth="129.0" promptText="DOOM" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                                                <TextField fx:id="txtExtraRewardB" alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="15.0" right="15.0" top="15.0" />
+                                             </VBox.margin>
+                                          </GridPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="tabFailureB" closable="false" text="Failure">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox alignment="CENTER" layoutY="15.0" prefHeight="257.0" prefWidth="377.0">
+                                       <children>
+                                          <Label contentDisplay="CENTER" text="Failure text B" textFill="WHITE">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <TextArea fx:id="txtFailureB" prefHeight="136.0" prefWidth="377.0" wrapText="true">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </TextArea>
+                                          <Label fx:id="lblBD" alignment="CENTER" prefHeight="17.0" prefWidth="443.0" text="Probably too long!" textFill="RED" visible="false" />
+                                          <GridPane alignment="CENTER">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="140.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <TextField fx:id="txtRewardBF" alignment="CENTER" prefHeight="25.0" prefWidth="155.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                                                <Label prefHeight="20.0" prefWidth="101.0" text="Reward" textFill="WHITE" GridPane.hgrow="SOMETIMES">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="cmbRewardsBF" prefHeight="25.0" prefWidth="158.0" promptText="REASON" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" GridPane.valignment="CENTER">
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                </ComboBox>
+                                                <Label text="Extra reward" textFill="WHITE" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Visual effect" textFill="WHITE" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="cmbVisualBF" prefHeight="25.0" prefWidth="259.0" promptText="WHITEFLASH" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                                                <ComboBox fx:id="cmbExtraRewardsBF" prefHeight="25.0" prefWidth="129.0" promptText="DOOM" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                                                <TextField fx:id="txtExtraRewardBF" alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="15.0" right="15.0" top="15.0" />
+                                             </VBox.margin>
+                                          </GridPane>
+                                       </children>
+                                    </VBox>
+                                 </children></AnchorPane>
+                           </content>
+                        </Tab>
+                     </tabs>
+                     <VBox.margin>
+                        <Insets left="15.0" right="15.0" top="25.0" />
+                     </VBox.margin>
+                  </TabPane>
+                  <Separator prefWidth="200.0" visible="false">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Separator>
+               </children>
+            </VBox>
+            <VBox fx:id="optionC" alignment="CENTER" disable="true" prefHeight="406.0" prefWidth="407.0" style="-fx-background-color: black;">
+               <children>
+                  <GridPane>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <ComboBox fx:id="comboCheckC" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" promptText="Story" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="-10.0" top="10.0" />
+                           </GridPane.margin></ComboBox>
+                        <Label text="Stat check" textFill="WHITE" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="Choice A text" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtOptionC" alignment="CENTER_RIGHT" styleClass="silver" stylesheets="@styles.css" translateX="11.0" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin></TextField>
+                     </children>
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </GridPane>
+                  <TabPane prefHeight="297.0" prefWidth="377.0" tabClosingPolicy="UNAVAILABLE">
+                     <tabs>
+                        <Tab closable="false" text="Success">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="297.0" prefWidth="377.0">
+                                 <children>
+                                    <VBox alignment="CENTER" layoutY="15.0" prefHeight="257.0" prefWidth="377.0">
+                                       <children>
+                                          <Label contentDisplay="CENTER" text="Success text C" textFill="WHITE">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <TextArea fx:id="txtSuccessC" prefHeight="136.0" prefWidth="377.0" wrapText="true">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </TextArea>
+                                          <Label fx:id="lblCS" alignment="CENTER" prefHeight="17.0" prefWidth="443.0" text="Probably too long!" textFill="RED" visible="false" />
+                                          <GridPane alignment="CENTER">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="90.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="140.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <TextField fx:id="txtRewardC" alignment="CENTER" prefHeight="25.0" prefWidth="155.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                                                <Label prefHeight="20.0" prefWidth="101.0" styleClass="smaller" text="Reward" textFill="WHITE" GridPane.hgrow="SOMETIMES">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="cmbRewardsC" prefHeight="25.0" prefWidth="104.0" promptText="NONE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" GridPane.valignment="CENTER">
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                </ComboBox>
+                                                <Label styleClass="smaller" text="Extra reward" textFill="WHITE" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label styleClass="smaller" text="Visual effect" textFill="WHITE" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="cmbVisualC" prefHeight="25.0" prefWidth="256.0" promptText="NONE" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                                                <ComboBox fx:id="cmbExtraRewardsC" prefHeight="25.0" prefWidth="113.0" promptText="NONE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                                                <TextField fx:id="txtExtraRewardC" alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="15.0" right="15.0" top="15.0" />
+                                             </VBox.margin>
+                                          </GridPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="tabFailureC" closable="false" disable="true" text="Failure">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox alignment="CENTER" layoutY="15.0" prefHeight="257.0" prefWidth="377.0">
+                                       <children>
+                                          <Label contentDisplay="CENTER" text="Failure text C" textFill="WHITE">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <TextArea fx:id="txtFailureC" prefHeight="136.0" prefWidth="377.0" wrapText="true">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </TextArea>
+                                          <Label fx:id="lblCF" alignment="CENTER" prefHeight="17.0" prefWidth="443.0" text="Probably too long!" textFill="RED" visible="false" />
+                                          <GridPane alignment="CENTER">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="90.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="140.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <TextField fx:id="txtRewardCF" alignment="CENTER" prefHeight="25.0" prefWidth="155.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                                                <Label prefHeight="20.0" prefWidth="101.0" text="Reward" textFill="WHITE" GridPane.hgrow="SOMETIMES">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="cmbRewardsCF" prefHeight="25.0" prefWidth="104.0" promptText="NONE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" GridPane.valignment="CENTER">
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                </ComboBox>
+                                                <Label text="Extra reward" textFill="WHITE" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Visual effect" textFill="WHITE" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="cmbVisualCF" prefHeight="25.0" prefWidth="290.0" promptText="NONE" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                                                <ComboBox fx:id="cmbExtraRewardsCF" prefHeight="25.0" prefWidth="113.0" promptText="NONE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                                                <TextField fx:id="txtExtraRewardCF" alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="15.0" right="15.0" top="15.0" />
+                                             </VBox.margin>
+                                          </GridPane>
+                                       </children>
+                                    </VBox>
+                                 </children></AnchorPane>
+                           </content>
+                        </Tab>
+                     </tabs>
+                     <VBox.margin>
+                        <Insets left="15.0" right="15.0" top="25.0" />
+                     </VBox.margin>
+                  </TabPane>
+                  <Separator prefWidth="200.0" visible="false">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Separator>
+               </children>
+            </VBox>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets top="25.0" />
+         </padding>
+      </HBox>
+      <ImageView fitHeight="25.0" fitWidth="1309.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" scaleZ="0.0" smooth="false" VBox.vgrow="ALWAYS">
+         <image>
+            <Image url="@line.png" />
+         </image>
+      </ImageView>
+      <HBox prefHeight="92.0" prefWidth="1259.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="76.0" prefWidth="866.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="56.0" text="Author" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="txtAuthor" prefHeight="25.0" prefWidth="123.0" stylesheets="@styles.css" />
+                  <Label prefHeight="25.0" prefWidth="75.0" text="Contact" textFill="WHITE" textOverrun="CLIP">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="txtContact" prefHeight="25.0" prefWidth="130.0" stylesheets="@styles.css" />
+                  <Button fx:id="btnSaveUser" mnemonicParsing="false" prefHeight="58.0" prefWidth="139.0" style="-fx-background-color: black; -fx-border-color: white;" styleClass="loadPic" stylesheets="@styles.css" text="Persist" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <VBox alignment="CENTER" prefHeight="76.0" prefWidth="252.0">
+                     <children>
+                        <Hyperlink fx:id="linkRepo" alignment="CENTER" prefHeight="18.0" prefWidth="220.0" style="-fx-font-weight: bold;" text="Check for updates. " textFill="WHITE" />
+                        <Hyperlink fx:id="linkDiscord" alignment="CENTER" prefHeight="18.0" prefWidth="220.0" style="-fx-font-weight: bold;" text="WOH DIscord : share  your events." textFill="WHITE" />
+                     </children>
+                  </VBox>
+               </children>
+               <HBox.margin>
+                  <Insets left="55.0" />
+               </HBox.margin>
+            </HBox>
+            <ButtonBar prefHeight="66.0" prefWidth="514.0">
+              <buttons>
+                  <Button fx:id="btnExit" minWidth="63.0" mnemonicParsing="false" prefHeight="62.0" style="-fx-background-color: black; -fx-border-color: white; -fx-border-width: 3;" stylesheets="@styles.css" text="Exit" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                <Button fx:id="btnLoadIto" mnemonicParsing="false" prefHeight="66.0" prefWidth="147.0" style="-fx-background-color: black; -fx-border-color: white; -fx-border-width: 3;" stylesheets="@styles.css" text="Load .ito" textFill="WHITE">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="btnSaveIto" mnemonicParsing="false" style="-fx-background-color: black; -fx-border-color: white; -fx-border-width: 3;" stylesheets="@styles.css" text="Save .ito" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+              </buttons>
+               <HBox.margin>
+                  <Insets bottom="10.0" right="30.0" top="15.0" />
+               </HBox.margin>
+            </ButtonBar>
+         </children>
+      </HBox>
+  </children>
+</VBox>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/EventMaker/EventMaker.iml" filepath="$PROJECT_DIR$/EventMaker/EventMaker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/out/EventViewer/EventViewer.iml" filepath="$PROJECT_DIR$/out/EventViewer/EventViewer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WOHMaker.iml" filepath="$PROJECT_DIR$/WOHMaker.iml" />
+    </modules>
+  </component>
+</project>

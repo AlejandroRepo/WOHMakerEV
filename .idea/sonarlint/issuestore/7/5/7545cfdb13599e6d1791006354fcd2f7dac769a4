@@ -1,0 +1,85 @@
+
+H
+java:S3740"/Provide the parametrized type for this generic.(“—¦µúÿÿÿÿ
+C
+java:S3740"/Provide the parametrized type for this generic.(ìÿ®
+H
+java:S3740"/Provide the parametrized type for this generic.(é±Ãûÿÿÿÿ
+c
+java:S1192"JDefine a constant instead of duplicating this literal "WOHMaker" 14 times.(º­Õáøÿÿÿÿ
+b
+java:S1192"NDefine a constant instead of duplicating this literal "Outcome text." 3 times.(íóæ
+’
+java:S1192"yDefine a constant instead of duplicating this literal "WOH Folder couldn't be located, please browser manually." 3 times.(‘‡ÀÖÿÿÿÿÿ
+_
+java:S1192"FDefine a constant instead of duplicating this literal "Local" 3 times.(“Úôøÿÿÿÿ
+Z
+java:S1192"FDefine a constant instead of duplicating this literal "story" 4 times.(àŒâí
+a
+java:S1192"HDefine a constant instead of duplicating this literal "AppData" 3 times.(“Úôøÿÿÿÿ
+Z
+java:S1192"GDefine a constant instead of duplicating this literal "random" 4 times.(µô6
+b
+java:S1192"IDefine a constant instead of duplicating this literal "itempool" 4 times.(°·óŞùÿÿÿÿ
+d
+java:S1192"KDefine a constant instead of duplicating this literal "user.home" 19 times.(º­Õáøÿÿÿÿ
+i
+java:S1192"PDefine a constant instead of duplicating this literal "enableArts=true" 6 times.(ÓÔ¬œüÿÿÿÿ
+d
+java:S1192"KDefine a constant instead of duplicating this literal "author.txt" 3 times.(àÔ‘µıÿÿÿÿ
+a
+java:S1192"HDefine a constant instead of duplicating this literal "wohgame" 3 times.(“Úôøÿÿÿÿ
+N
+java:S1141"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+<
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+<
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+<
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+<
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+<
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+<
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+<
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+<
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+<
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+<
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+<
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+<
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+<
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+<
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+k
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(‘îî·øÿÿÿÿ
+<	java:S108")Either remove or fill this block of code.(ßÈ´
+o
+java:S1905"VRemove this unnecessary cast to "org.sonar.java.resolve.Symbols$UnknownType@634bce71".(£¿Å›ÿÿÿÿÿ
+o
+java:S1905"VRemove this unnecessary cast to "org.sonar.java.resolve.Symbols$UnknownType@634bce71".(ãÎÑ úÿÿÿÿ
+j
+java:S1905"VRemove this unnecessary cast to "org.sonar.java.resolve.Symbols$UnknownType@634bce71".(ûÏÏÆ
+i
+java:S1905"VRemove this unnecessary cast to "org.sonar.java.resolve.Symbols$UnknownType@634bce71".(ûç‡7
+f
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 49 to the 15 allowed.(ŞäÅ
+X
+java:S3358"DExtract this nested ternary operation into an independent statement.(ìÿ®
+X
+java:S3358"DExtract this nested ternary operation into an independent statement.(ìÿ®
+f
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 50 to the 15 allowed.(ÃãöŸ
+l
+java:S3776"SRefactor this method to reduce its Cognitive Complexity from 162 to the 15 allowed.(÷ìÀúÿÿÿÿ
+k
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(È°ñõúÿÿÿÿ
+Q	java:S106"9Replace this use of System.out or System.err by a logger.(‚Ó™îıÿÿÿÿ

@@ -1,0 +1,52 @@
+.text-area {
+  -fx-font-family: Silver;
+  -fx-font-size: 22;
+}
+
+.helpArea .scroll-bar{
+  -fx-opacity: 0;
+  -fx-max-width: 0px;
+}
+
+.helpArea .content{
+  -fx-background-color: black;
+  -fx-border-width: 2px;
+  -fx-border-color: white;
+}
+
+.flavor .content{
+  -fx-background-color: black;
+  -fx-border-width: 2px;
+  -fx-border-color: white;
+}
+
+.flavor {
+  -fx-font-family: Silver;
+  -fx-text-fill: white;
+  -fx-font-size: 22;
+}
+
+.loadPic {
+   -fx-border-insets: 13;
+  }
+
+
+.hoverable:hover {
+  -fx-font-fill: red;
+}
+
+.small {
+ -fx-background-insets: 18,18,18,18;
+  -fx-font-size: 19;
+}
+
+
+.silver {
+ -fx-font-family: Silver;
+  -fx-font-size: 25;
+   -fx-background-insets: 12,12,12;
+}
+
+.helpArea {
+  -fx-text-fill: white;
+}
