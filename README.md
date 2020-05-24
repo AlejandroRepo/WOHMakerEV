@@ -2,7 +2,6 @@
 
 World of Horror custom event creation tool
 
-Current version: 1.0 Jlink test
 Download link:  <b>[Download WOHMaker 1.0 Jlink test](WOHMaker.zip?raw=true)</b>
 
 
