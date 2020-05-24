@@ -1,3 +1,2 @@
-eventviewer\Main.class
-module-info.class
-eventviewer\Controller.class
+eventmaker\Controller.class
+eventmaker\Main.class

@@ -16,7 +16,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="EventViewer" />
         <module name="EventMaker" />
       </profile>
     </annotationProcessing>
@@ -27,7 +26,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="EventMaker" options="--add-exports --org.controlsfx.controls/impl.org.controlsfx.autocompletion=EventViewer" />
+      <module name="EventMaker" options="--add-exports=org.controlsfx.controls/impl.org.controlsfx.autocompletion=EventMaker" />
       <module name="EventViewer" options="--add-exports --org.controlsfx.controls/impl.org.controlsfx.autocompletion=EventViewer" />
     </option>
   </component>

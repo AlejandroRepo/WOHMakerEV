@@ -5,6 +5,6 @@ module EventMaker {
     requires javafx.controls;
     requires org.controlsfx.controls;
 
-    opens eventviewer;
-    exports eventviewer;
+    opens eventmaker;
+    exports eventmaker;
 }

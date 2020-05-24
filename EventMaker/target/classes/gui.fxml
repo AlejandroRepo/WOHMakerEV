@@ -26,7 +26,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="850.0" prefWidth="1310.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eventviewer.Controller">
+<VBox prefHeight="850.0" prefWidth="1310.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eventmaker.Controller">
   <children>
       <ImageView fitHeight="25.0" fitWidth="1313.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5">
          <image>
