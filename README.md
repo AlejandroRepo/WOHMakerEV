@@ -2,28 +2,25 @@
 
 World of Horror custom event creation tool
 
-Download link:  <b>[Download WOHMaker 1.0 Jlink test](WOHMaker.zip?raw=true)</b>
-
+Download link:  <b>[Download WOHMaker 1.0-SNAPSHOT](WOHMaker.zip?raw=true)</b>
 
 Features:
 
     Create, read, edit and save WHO's event files (.ito) easily.
-    All current features implemented (extra_rewards, wavy art, spells...).
-    Integrated help, Autocomplete and warning messages (text lenght, image resolution) to lower chance of errors.
-    Automatic pathing for files and images.
+    All current (0.9.14) features implemented (extra_rewards, itempools, global, wavy art, spells...).
+    OnScreen help and tips, reward autocompletion and warning messages (text length, image resolution) to lower chance of errors.
+    Automatic pathing for files and images. Choose the pic you want for your event and the program will put it were it must.
 
 Requirements:
 
-    None, supposedly.
+    Windows OS, preferably 10.
+    1366x768 minimum resolution.
 
 TO DO:
-
+    
     Implement new features as they are being provided by the game.
     Offer support for custom enemies when they become available.
-
-KNOWN ERRORS:
-
-    UNIX/macOS paths still to be configured.
+    Provide launcher for linux/macOS
 
 By Dae
 
