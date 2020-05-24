@@ -469,8 +469,6 @@ public class Controller implements Initializable {
             imageViewDialog.initStyle(StageStyle.UTILITY);
             imageViewDialog.getDialogPane().setStyle("-fx-background-color: black;");
         });
-
-
     }
 
     File prefs = Paths.get(System.getProperty("user.home"), "WOHMaker", "prefs.dat").toFile();
@@ -641,7 +639,7 @@ public class Controller implements Initializable {
             try {
                 if (Desktop.isDesktopSupported()) {
                     Desktop.getDesktop()
-                        .browse(new URI("https://github.com/AlejandroRepo/WOHMaker"));
+                        .browse(new URI("https://github.com/AlejandroRepo/WOHMakerEV"));
                 } else {
                     // Ubuntu
                     Runtime runtime = Runtime.getRuntime();

@@ -244,7 +244,7 @@
                               <Insets right="60.0" />
                            </padding>
                         </TextArea>
-                        <ImageView fitHeight="150.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true" scaleX="0.3" scaleY="0.3" smooth="false" translateX="-210.0" translateY="-45.0">
+                        <ImageView fitHeight="150.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true" scaleX="0.3" scaleY="0.3" smooth="false" translateX="-210.0" translateY="-45.0" StackPane.alignment="CENTER">
                            <image>
                               <Image url="@help2.png" />
                            </image>

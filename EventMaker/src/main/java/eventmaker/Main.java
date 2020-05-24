@@ -35,8 +35,6 @@ public class Main extends Application {
         primaryStage.getScene().getRoot().requestLayout();
         primaryStage.show();
 
-
-
         primaryStage.centerOnScreen();
     }
 
