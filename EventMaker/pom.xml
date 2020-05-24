@@ -8,7 +8,6 @@
     <artifactId>EventViewer</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>11</maven.compiler.release>
@@ -85,7 +84,8 @@
                         <option>javafx.base/com.sun.javafx.event=org.controlsfx.controls</option>
                     </options>
                     <mainClass>eventmaker.Main</mainClass>
-                    <target>C:\WOHBInaries</target>
+                    <noHeaderFiles>true</noHeaderFiles>
+                    <noManPages>true</noManPages>
                 </configuration>
             </plugin>
         </plugins>

@@ -22,6 +22,8 @@ import javax.imageio.ImageIO;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import impl.org.controlsfx.autocompletion.SuggestionProvider;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -53,7 +55,7 @@ import javafx.util.Pair;
 
 public class Controller implements Initializable {
 
-    List<String> locationsList = Arrays.asList("downtown", "apartment", "school", "hospital", "seaside", "forest", "mansion", "schoolhospital", "seasideforest", "village", "atorasu", "athyola","gozu","ithotu");
+    List<String> locationsList = Arrays.asList("global", "downtown", "apartment", "school", "hospital", "seaside", "forest", "mansion", "schoolhospital", "seasideforest", "village", "atorasu", "athyola","gozu","ithotu");
     List<String> checksList = Arrays.asList("story", "strength", "dexterity", "perception", "knowledge", "luck", "charisma","funds1","funds2");
     List<String> itemList = Arrays.asList("STEAK KNIFE", "CAMERA", "NICE RING", "KENDO HELMET", "SEWING KIT",
         "BACKPACK", "WINE BOTTLE", "CIGARETTES", "SMALL CANDLE", "CARPENTER HAMMER", "HOLY CANDLE",
@@ -329,6 +331,9 @@ public class Controller implements Initializable {
     Hyperlink linkRepo;
 
     @FXML
+    ImageView lowerBand;
+
+    @FXML
     Button btnCLear;
 
     @FXML
@@ -349,9 +354,20 @@ public class Controller implements Initializable {
     @FXML
     Label lblCF;
 
+    @FXML
+    ImageView band1;
+
+    @FXML
+    ImageView band2;
+
+    @FXML
+    VBox root;
+
     Dialog imageViewDialog = new Dialog();
 
     String currentImage = "";
+
+    static BooleanProperty smallScreenMode = new SimpleBooleanProperty(false);
 
     boolean forceFileRefresh = true;
 
@@ -366,6 +382,13 @@ public class Controller implements Initializable {
         comboChecks.addAll(Arrays.asList(comboCheckA,comboCheckB,comboCheckC));
         lblWarnings.addAll(Arrays.asList(lblAS,lblAF,lblBS, lblBD,lblCS,lblCF));
         txtExtraRewards.addAll(Arrays.asList(txtExtraRewardA,txtExtraRewardAF,txtExtraRewardB,txtExtraRewardBF,txtExtraRewardC,txtExtraRewardCF));
+
+        smallScreenMode.addListener(inv -> {
+            band1.setManaged(false);
+            band1.setVisible(false);
+            band2.setVisible(false);
+            band2.setManaged(false);
+        });
 
         btnCLear.setGraphic(new ImageView(new Image(Controller.class.getResource("/erase.png").toExternalForm())));
         btnLoadPic.setGraphic(new ImageView(new Image("/load.png")));
@@ -431,6 +454,29 @@ public class Controller implements Initializable {
         txtAuthor.setOnKeyReleased(evt -> btnSaveUser.setDisable(false));
         txtContact.setOnKeyReleased(evt -> btnSaveUser.setDisable(false));
 
+
+
+        // listen to selected type of rewards and refreshes autocompletion lists for all related widgets
+        installAutoComplete();
+
+        // Image dialog
+
+        imgArt.sceneProperty().addListener(inv -> {
+            imageViewDialog.initOwner(imgArt.getScene().getWindow());
+            imageViewDialog.getDialogPane().getButtonTypes().setAll(ButtonType.CLOSE);
+            imageViewDialog.initModality(Modality.NONE);
+            imageViewDialog.setResizable(false);
+            imageViewDialog.initStyle(StageStyle.UTILITY);
+            imageViewDialog.getDialogPane().setStyle("-fx-background-color: black;");
+        });
+
+
+    }
+
+    File prefs = Paths.get(System.getProperty("user.home"), "WOHMaker", "prefs.dat").toFile();
+
+
+    void installAutoComplete(){
         // listen to selected type of rewards and refreshes autocompletion lists for all related widgets
         ArrayList<Pair<ComboBox<String>,TextField>> temp = new ArrayList<>();
 
@@ -461,22 +507,7 @@ public class Controller implements Initializable {
                 refreshAutocompletion(txtField,"none");
             }
         }));
-
-        // Image dialog
-
-        imgArt.sceneProperty().addListener(inv -> {
-            imageViewDialog.initOwner(imgArt.getScene().getWindow());
-            imageViewDialog.getDialogPane().getButtonTypes().setAll(ButtonType.CLOSE);
-            imageViewDialog.initModality(Modality.NONE);
-            imageViewDialog.setResizable(false);
-            imageViewDialog.initStyle(StageStyle.UTILITY);
-            imageViewDialog.getDialogPane().setStyle("-fx-background-color: black;");
-        });
-
     }
-
-    File prefs = Paths.get(System.getProperty("user.home"), "WOHMaker", "prefs.dat").toFile();
-
 
     /**
      * Recursively clears input on every control
@@ -615,7 +646,7 @@ public class Controller implements Initializable {
                     // Ubuntu
                     Runtime runtime = Runtime.getRuntime();
                     runtime.exec("/usr/bin/firefox -new-window "
-                        + "https://github.com/AlejandroRepo/WOHMaker");
+                        + "https://github.com/AlejandroRepo/WOHMakerEV");
                 }
             } catch (IOException | URISyntaxException e) {
                 e.printStackTrace();
@@ -837,8 +868,7 @@ public class Controller implements Initializable {
         txtFailureB.hoverProperty().addListener(inv -> helpAreaTxt.setText("Text shown if failing the check for option B."));
         txtFailureC.hoverProperty().addListener(inv -> helpAreaTxt.setText("Text shown if failing the check for option C."));
         cmbOptions.hoverProperty().addListener(inv -> helpAreaTxt.setText("Number of choices presented to the player in this event."));
-        cmbLocation.hoverProperty().addListener(inv -> helpAreaTxt.setText("The event will be added to this area's deck alone. God-dependant locations are global, tho."));
-        cmbVisualA.hoverProperty().addListener(inv -> helpAreaTxt.setText("The event will be added to this area's deck alone. God-dependant locations are global, tho."));
+        cmbLocation.hoverProperty().addListener(inv -> helpAreaTxt.setText("God-dependant locations are global."));
         chkWavy.hoverProperty().addListener(inv -> helpAreaTxt.setText("If enabled, the art will undulate at the given speed."));
         sldWavy.hoverProperty().addListener(inv -> helpAreaTxt.setText("The higher, the quickers the wavy animation will be"));
         chkBigArt.hoverProperty().addListener(inv -> helpAreaTxt.setText("Big arts take the whole event screen. Will be selected automatically when loading a pic."));
@@ -854,6 +884,10 @@ public class Controller implements Initializable {
         comboChecks.forEach(cmb -> cmb.hoverProperty().addListener(inv -> helpAreaTxt.setText(TESTINFO)));
         comboRewards.forEach(cmb -> cmb.hoverProperty().addListener(inv -> helpAreaTxt.setText(REWARDINFO)));
         comboVisual.forEach(cmb -> cmb.hoverProperty().addListener(inv -> helpAreaTxt.setText(VISUALINFO)));
+    }
+
+    static void setSmallScreenMode(boolean state){
+        smallScreenMode.setValue(state);
     }
 
     /**
@@ -1196,9 +1230,10 @@ public class Controller implements Initializable {
                             + System.lineSeparator() +
 
                             "--Made with WOHMaker--=" + System.lineSeparator());
+            }
 
-            return true;
-        }
+        return true;
+
         }catch(Exception e){
         e.printStackTrace();
         return false;

@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -19,10 +20,24 @@ public class Main extends Application {
 
         primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/help.png")));
 
-        primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
-        primaryStage.setRenderScaleX(1.2);
+
+        double width = Screen.getPrimary().getBounds().getWidth();
+        double height = Screen.getPrimary().getBounds().getHeight();
+
+        if (width<1920 && height<1080){
+          primaryStage.setWidth(width-(width*0.05));
+          primaryStage.setHeight(height-(height*0.05));
+          Controller.setSmallScreenMode(true);
+        }
+
+        primaryStage.setScene(new Scene(root));
+        primaryStage.getScene().getRoot().requestLayout();
         primaryStage.show();
+
+
+
+        primaryStage.centerOnScreen();
     }
 
 
