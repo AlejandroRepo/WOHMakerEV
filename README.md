@@ -35,7 +35,10 @@ Technical:
     
     Written in Java 11, JavaFX 14.0.1. Compiled, ran and released as jLink image through javafx-maven-plugin.
 
-Credits:
+Credits and thanks:
 
+    Silver font which is used in certain parts of the UI is the work of PoppyWOrks (https://poppyworks.itch.io/silver).
 
-    Thanks to: Mythical, for providing asset lists and general help. Throdax, for coding advices and collaboration.
+    Thanks to: 
+    Mythical, for providing asset lists and general help.
+    Throdax, for coding advices and collaboration.
