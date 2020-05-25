@@ -20,8 +20,8 @@ Requirements:
 
 Known issues:
     
-  [Minor] Loading an .ito with a Curse, Injury or Ally reward type will not update the text on the combobox accordingly. 
-  [Minor] Even if option A is set as "story" by default, it will allow user to access the "failure" tab until refreshed.
+    [Minor] Loading an .ito with a Curse, Injury or Ally reward type will not update the text on the combobox accordingly. 
+    [Minor] Even if option A is set as "story" by default, it will allow user to access the "failure" tab until refreshed.
   
 TO DO:
     
@@ -35,6 +35,7 @@ Technical:
     
     Written in Java 11, JavaFX 14.0.1. Compiled, ran and released as jLink image through javafx-maven-plugin.
 
-By Dae
+Credits:
 
-Thanks to: Mythical, for providing asset lists and general help. Throdax, for coding advices and collaboration.
+
+    Thanks to: Mythical, for providing asset lists and general help. Throdax, for coding advices and collaboration.
