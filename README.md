@@ -4,6 +4,8 @@ World of Horror custom event creation tool
 
 Download link:  <b>[Download WOHMaker 1.0-SNAPSHOT](WOHMaker.zip?raw=true)</b>
 
+![wohmakert](wohmaker.png)
+
 Features:
 
     Create, read, edit and save WHO's event files (.ito) easily.
