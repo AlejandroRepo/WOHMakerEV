@@ -45,6 +45,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -235,10 +236,10 @@ public class Controller implements Initializable {
     Button btnLoadIto;
 
     @FXML
-    TextArea helpAreaTxt;
+    AnchorPane helpArea;
 
     @FXML
-    StackPane helpArea;
+    TextArea helpAreatxt;
 
     @FXML
     TextField txtOptionA;
@@ -690,6 +691,7 @@ public class Controller implements Initializable {
 
         btnHideHelp.setOnMouseClicked(evt -> {
             helpArea.setVisible(!helpArea.isVisible());
+            helpAreatxt.setVisible(!helpArea.isVisible());
             savePrefs("enableHelp", helpArea.isVisible());
         });
 
@@ -741,6 +743,7 @@ public class Controller implements Initializable {
                 List<String> strings = Files.readAllLines(prefs.toPath());
                 strings.forEach(str -> {
                     if (str.contains("enableHelp")) helpArea.setVisible(str.equals("enableHelp=true"));
+                    if (str.contains("enableHelp")) helpAreatxt.setVisible(str.equals("enableHelp=true"));
                     if (str.contains("forceRefresh")) forceFileRefresh=str.equals("forceRefresh=true");
                     if (str.contains("enableArts")) {
                         imgGuiArt.setVisible(str.equals("enableArts=true"));
@@ -852,36 +855,36 @@ public class Controller implements Initializable {
 
     void implementHelpSystem(){
 
-        textTitle.hoverProperty().addListener((ob,old,newValue) -> {if (newValue) helpAreaTxt.setText("Shown on the upper-left part of the screen and mod menu.");});
-        textDesc.hoverProperty().addListener(inv -> helpAreaTxt.setText("Shown only in the mod menu. \nSmall! around 25 chars maximum."));
-        textFlav.hoverProperty().addListener(inv -> helpAreaTxt.setText("Around 350 chars max. \nLine breaks will be respected."));
-        txtAuthor.hoverProperty().addListener(inv -> helpAreaTxt.setText("Shown in the lower-left part of the event screen, and mod menu."));
-        txtContact.hoverProperty().addListener(inv -> helpAreaTxt.setText("Not shown in-game. A way for old god panstasz to contact you shall it be necessary."));
-        txtSuccessA.hoverProperty().addListener(inv -> helpAreaTxt.setText("Outcome text."));
-        txtSuccessB.hoverProperty().addListener(inv -> helpAreaTxt.setText("Outcome text."));
-        txtSuccessC.hoverProperty().addListener(inv -> helpAreaTxt.setText("Outcome text."));
-        linkRepo.hoverProperty().addListener(inv -> helpAreaTxt.setText("Feel free to do forks and throw pull requests."));
-        linkDiscord.hoverProperty().addListener(inv -> helpAreaTxt.setText("WOH community awaits virgin blood..."));
-        txtFailureA.hoverProperty().addListener(inv -> helpAreaTxt.setText("Text shown if failing the check for option A."));
-        txtFailureB.hoverProperty().addListener(inv -> helpAreaTxt.setText("Text shown if failing the check for option B."));
-        txtFailureC.hoverProperty().addListener(inv -> helpAreaTxt.setText("Text shown if failing the check for option C."));
-        cmbOptions.hoverProperty().addListener(inv -> helpAreaTxt.setText("Number of choices presented to the player in this event."));
-        cmbLocation.hoverProperty().addListener(inv -> helpAreaTxt.setText("God-dependant locations are global."));
-        chkWavy.hoverProperty().addListener(inv -> helpAreaTxt.setText("If enabled, the art will undulate at the given speed."));
-        sldWavy.hoverProperty().addListener(inv -> helpAreaTxt.setText("The higher, the quickers the wavy animation will be"));
-        chkBigArt.hoverProperty().addListener(inv -> helpAreaTxt.setText("Big arts take the whole event screen. Will be selected automatically when loading a pic."));
-        btnLoadIto.hoverProperty().addListener(inv -> helpAreaTxt.setText("Loads an already created event and parses its contents."));
-        btnSaveUser.hoverProperty().addListener(inv -> helpAreaTxt.setText("Persists user/contact information so it's filled automatically when loading this app."));
-        btnExit.hoverProperty().addListener(inv -> helpAreaTxt.setText("Closes the app, any unsaved change will be lost!"));
-        btnLoadPic.hoverProperty().addListener(inv -> helpAreaTxt.setText("Select the art to display in the event. Small events are 195x164, while big ones are 506x2020. Avoid using other resolutions."));
-        btnSaveIto.hoverProperty().addListener(inv -> helpAreaTxt.setText("Saves the event to disk as an .ito file. Put them in custom, sandbox or test sub-folders."));
+        textTitle.hoverProperty().addListener((ob,old,newValue) -> {if (newValue) helpAreatxt.setText("Shown on the upper-left part of the screen and mod menu.");});
+        textDesc.hoverProperty().addListener(inv -> helpAreatxt.setText("Shown only in the mod menu. \nSmall! around 25 chars maximum."));
+        textFlav.hoverProperty().addListener(inv -> helpAreatxt.setText("Around 350 chars max. \nLine breaks will be respected."));
+        txtAuthor.hoverProperty().addListener(inv -> helpAreatxt.setText("Shown in the lower-left part of the event screen, and mod menu."));
+        txtContact.hoverProperty().addListener(inv -> helpAreatxt.setText("Not shown in-game. A way for old god panstasz to contact you shall it be necessary."));
+        txtSuccessA.hoverProperty().addListener(inv -> helpAreatxt.setText("Outcome text."));
+        txtSuccessB.hoverProperty().addListener(inv -> helpAreatxt.setText("Outcome text."));
+        txtSuccessC.hoverProperty().addListener(inv -> helpAreatxt.setText("Outcome text."));
+        linkRepo.hoverProperty().addListener(inv -> helpAreatxt.setText("Feel free to do forks and throw pull requests."));
+        linkDiscord.hoverProperty().addListener(inv -> helpAreatxt.setText("WOH community awaits virgin blood..."));
+        txtFailureA.hoverProperty().addListener(inv -> helpAreatxt.setText("Text shown if failing the check for option A."));
+        txtFailureB.hoverProperty().addListener(inv -> helpAreatxt.setText("Text shown if failing the check for option B."));
+        txtFailureC.hoverProperty().addListener(inv -> helpAreatxt.setText("Text shown if failing the check for option C."));
+        cmbOptions.hoverProperty().addListener(inv -> helpAreatxt.setText("Number of choices presented to the player in this event."));
+        cmbLocation.hoverProperty().addListener(inv -> helpAreatxt.setText("God-dependant locations are global."));
+        chkWavy.hoverProperty().addListener(inv -> helpAreatxt.setText("If enabled, the art will undulate at the given speed."));
+        sldWavy.hoverProperty().addListener(inv -> helpAreatxt.setText("The higher, the quickers the wavy animation will be"));
+        chkBigArt.hoverProperty().addListener(inv -> helpAreatxt.setText("Big arts take the whole event screen. Will be selected automatically when loading a pic."));
+        btnLoadIto.hoverProperty().addListener(inv -> helpAreatxt.setText("Loads an already created event and parses its contents."));
+        btnSaveUser.hoverProperty().addListener(inv -> helpAreatxt.setText("Persists user/contact information so it's filled automatically when loading this app."));
+        btnExit.hoverProperty().addListener(inv -> helpAreatxt.setText("Closes the app, any unsaved change will be lost!"));
+        btnLoadPic.hoverProperty().addListener(inv -> helpAreatxt.setText("Select the art to display in the event. Small events are 195x164, while big ones are 506x2020. Avoid using other resolutions."));
+        btnSaveIto.hoverProperty().addListener(inv -> helpAreatxt.setText("Saves the event to disk as an .ito file. Put them in custom, sandbox or test sub-folders."));
 
-        txtExtraRewards.forEach(txt -> txt.hoverProperty().addListener(inv -> helpAreaTxt.setText(EXTRAREWARDSINFO)));
-        txtRewardList.forEach(txt -> txt.hoverProperty().addListener(inv -> helpAreaTxt.setText(REWARDINFO)));
-        comboExtraRewards.forEach(cmb -> cmb.hoverProperty().addListener(inv -> helpAreaTxt.setText(EXTRAREWARDSINFO)));
-        comboChecks.forEach(cmb -> cmb.hoverProperty().addListener(inv -> helpAreaTxt.setText(TESTINFO)));
-        comboRewards.forEach(cmb -> cmb.hoverProperty().addListener(inv -> helpAreaTxt.setText(REWARDINFO)));
-        comboVisual.forEach(cmb -> cmb.hoverProperty().addListener(inv -> helpAreaTxt.setText(VISUALINFO)));
+        txtExtraRewards.forEach(txt -> txt.hoverProperty().addListener(inv -> helpAreatxt.setText(EXTRAREWARDSINFO)));
+        txtRewardList.forEach(txt -> txt.hoverProperty().addListener(inv -> helpAreatxt.setText(REWARDINFO)));
+        comboExtraRewards.forEach(cmb -> cmb.hoverProperty().addListener(inv -> helpAreatxt.setText(EXTRAREWARDSINFO)));
+        comboChecks.forEach(cmb -> cmb.hoverProperty().addListener(inv -> helpAreatxt.setText(TESTINFO)));
+        comboRewards.forEach(cmb -> cmb.hoverProperty().addListener(inv -> helpAreatxt.setText(REWARDINFO)));
+        comboVisual.forEach(cmb -> cmb.hoverProperty().addListener(inv -> helpAreatxt.setText(VISUALINFO)));
     }
 
     static void setSmallScreenMode(boolean state){
