@@ -27,7 +27,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="root" alignment="CENTER" fillWidth="false" prefHeight="929.0" prefWidth="1311.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eventmaker.Controller">
+<VBox fx:id="root" alignment="CENTER" fillWidth="false" prefHeight="929.0" prefWidth="1311.0" style="-fx-background-color: black;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eventmaker.Controller">
   <children>
       <ImageView fx:id="band1" fitHeight="25.0" fitWidth="1313.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -149,7 +149,7 @@
                               </Label>
                               <VBox>
                                  <children>
-                                    <TextArea fx:id="textFlav" prefHeight="126.0" prefWidth="691.0" style="-fx-border-width: 3px;" styleClass="flavor" translateX="-20.0" wrapText="true">
+                                    <TextArea fx:id="textFlav" prefHeight="126.0" prefWidth="691.0" style="-fx-border-width: 3px;" styleClass="flavor" stylesheets="@styles.css" translateX="-20.0" wrapText="true">
                                        <font>
                                           <Font name="System Italic" size="16.0" />
                                        </font>
@@ -290,6 +290,7 @@
                   <Image url="@logo.png" />
                </image>
             </ImageView>
+            <Label text="v1.1" textFill="WHITE" />
             <ImageView fx:id="imgGuiArt4" fitHeight="150.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8" smooth="false">
                <image>
                   <Image url="@art4.png" />
