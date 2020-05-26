@@ -1,5 +1,7 @@
 package eventmaker;
 
+import java.nio.file.Paths;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,10 +22,10 @@ public class Main extends Application {
 
         primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/help.png")));
 
-        primaryStage.setResizable(false);
-
         double width = Screen.getPrimary().getBounds().getWidth();
         double height = Screen.getPrimary().getBounds().getHeight();
+
+        primaryStage.setResizable(false);
 
         if (width<1920 && height<1080){
           primaryStage.setWidth(width-(width*0.05));
