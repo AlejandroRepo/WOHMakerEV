@@ -2,9 +2,16 @@
 
 World of Horror custom event creation tool.
 
-Download link:  <b>[Download WOHMaker 1.0-SNAPSHOT](WOHMaker.zip?raw=true)</b>
+Download link:  <b>[Download WOHMaker 1.1](WOHMaker1.1.zip?raw=true)</b>
 
 ![wohmakert](wohmaker.png)
+
+**Version 1.1:**
+- Improved overall visuals and layout for better legibility
+- Fixed most ui issues
+- Corrected items and spell lists
+- removed global location (currently not working in woh)
+
 
 Features:
 
