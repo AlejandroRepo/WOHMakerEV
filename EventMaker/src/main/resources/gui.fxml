@@ -261,14 +261,14 @@
             <Insets bottom="20.0" top="25.0" />
          </padding>
       </GridPane>
-      <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+      <HBox alignment="CENTER_RIGHT" VBox.vgrow="ALWAYS">
          <children>
             <ImageView fx:id="imgGuiArt2" fitHeight="130.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8" smooth="false" translateY="8.0">
                <image>
                   <Image url="@art2.png" />
                </image>
                <HBox.margin>
-                  <Insets />
+                  <Insets left="40.0" />
                </HBox.margin>
             </ImageView>
             <ImageView fx:id="imgGuiArt" fitHeight="150.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8" smooth="false" translateY="-3.0">
@@ -294,13 +294,16 @@
                <image>
                   <Image url="@art4.png" />
                </image>
+               <HBox.margin>
+                  <Insets right="15.0" />
+               </HBox.margin>
             </ImageView>
-            <Label alignment="CENTER" contentDisplay="TOP" prefHeight="26.0" prefWidth="179.0" text="Available options" textAlignment="CENTER" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="TOP" prefHeight="26.0" prefWidth="158.0" text="Available options" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
                <HBox.margin>
-                  <Insets left="30.0" />
+                  <Insets />
                </HBox.margin>
             </Label>
             <ComboBox fx:id="cmbOptions" prefHeight="35.0" prefWidth="59.0" />
