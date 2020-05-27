@@ -30,21 +30,22 @@
    -fx-border-insets: 13;
   }
 
-
-.hoverable:hover {
-  -fx-font-fill: red;
-}
-
 .small {
- -fx-background-insets: 18,18,18,18;
+  -fx-background-insets: 18,18,18,18;
   -fx-font-size: 19;
 }
 
 
 .silver {
- -fx-font-family: Silver;
+  -fx-font-family: Silver;
   -fx-font-size: 25;
-   -fx-background-insets: 12,12,12;
+  -fx-background-insets: 12,12,12;
+}
+
+.title {
+  -fx-font-family: Silver;
+  -fx-font-size: 30;
+  -fx-background-insets: 12,12,12;
 }
 
 .helpArea {
