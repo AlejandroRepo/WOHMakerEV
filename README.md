@@ -27,8 +27,8 @@ Requirements:
     1366x768 minimum resolution.
 
 Known issues:
-    
-    [Minor] 
+
+    [None right now]
     
 TO DO:
     
