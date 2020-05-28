@@ -9,9 +9,10 @@ Download link:  <b>[Download WOHMaker 1.1](WOHMaker1.1.zip?raw=true)</b>
 **Version 1.1:**
 - Improved overall visuals and layout for better legibility
 - Fixed most ui issues
-- Corrected items and spell lists
+- Corrected names for items and spells.
 - removed global location (currently not working in woh)
-
+- Option controls will be automatically cleaned when disabling the option or reading from file.
+- Improved behaviour of options tabs
 
 Features:
 
@@ -27,12 +28,11 @@ Requirements:
 
 Known issues:
     
-    [Minor] Loading an .ito with a Curse, Injury or Ally reward type will not update the text on the combobox accordingly. 
-    [Minor] Even if option A is set as "story" by default, it will allow user to access the "failure" tab until refreshed.
-  
+    [Minor] 
+    
 TO DO:
     
-    Polish the UI. Make it rezisable and adjust better to different resolutions.
+    Make UI rezisable and adjust better to different resolutions.
     Make it so sta/rea/doom/funds rewards take only integers as value.
     Implement new features as they are being provided by the game.
     Provide a proper windows executable.
@@ -44,7 +44,7 @@ Technical:
 
 Credits and thanks:
 
-    Silver font which is used in certain parts of the UI is the work of PoppyWOrks (https://poppyworks.itch.io/silver).
+    Silver font which is used in certain parts of the UI is the work of PoppyWorks (https://poppyworks.itch.io/silver).
 
     Thanks to: 
     Mythical, for providing asset lists and general help.
