@@ -8,10 +8,25 @@
   -fx-max-width: 0px;
 }
 
+.floatingBtn:hover{
+  -fx-scale-x: 1.15;
+  -fx-scale-y: 1.15;
+}
+
+.loadPic:hover{
+ -fx-scale-x: 0.95;
+  -fx-scale-y: 0.95;
+}
+
 .helpArea .content{
   -fx-background-color: black;
   -fx-border-width: 2px;
   -fx-border-color: white;
+}
+
+.helpArea.content :selected{
+  -fx-border-color: white;
+  -fx-background-color:black;
 }
 
 .flavor .content{

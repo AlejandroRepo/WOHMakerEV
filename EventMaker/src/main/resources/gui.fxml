@@ -97,7 +97,7 @@
                   </HBox>
                   <HBox prefHeight="88.0" prefWidth="491.0" GridPane.columnIndex="3" GridPane.rowSpan="2">
                      <children>
-                        <AnchorPane fx:id="helpArea" prefHeight="83.0" prefWidth="84.0" style="-fx-border-color: white; -fx-border-width: 4px;">
+                        <AnchorPane fx:id="helpArea" prefHeight="83.0" prefWidth="84.0" style="-fx-border-color: white; -fx-border-width: 4px;" translateY="-4.0">
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" smooth="false" translateX="3.0" translateY="4.0">
                                  <image>
@@ -106,15 +106,23 @@
                               </ImageView>
                            </children>
                         </AnchorPane>
-                        <TextArea fx:id="helpAreatxt" maxHeight="116.0" maxWidth="428.0" prefHeight="88.0" prefWidth="382.0" promptText="Help will appear here..." style="-fx-background-color: black;" styleClass="helpArea" stylesheets="@styles.css" wrapText="true">
+                        <TextArea fx:id="helpAreatxt" maxHeight="116.0" maxWidth="428.0" prefHeight="88.0" prefWidth="382.0" promptText="Help will appear here..." style="-fx-background-color: black;" styleClass="helpArea" stylesheets="@styles.css" translateY="-4.0" wrapText="true">
                            <font>
                               <Font size="14.0" />
                            </font>
                            <opaqueInsets>
                               <Insets right="80.0" />
                            </opaqueInsets>
+                           <cursor>
+                              <Cursor fx:constant="CROSSHAIR" />
+                           </cursor>
                         </TextArea>
-                        <ImageView fx:id="btnHideHelp" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                        <ImageView fx:id="imgBack" fitHeight="150.0" fitWidth="300.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" scaleY="0.8" smooth="false" translateX="80.0" translateY="-18.0" translateZ="-5.0" visible="false">
+                           <image>
+                              <Image url="@back.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="btnHideHelp" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" smooth="false" styleClass="floatingBtn">
                            <image>
                               <Image url="@CLOSE.png" />
                            </image>
@@ -125,7 +133,8 @@
                      </children>
                      <padding>
                         <Insets bottom="15.0" />
-                     </padding></HBox>
+                     </padding>
+                  </HBox>
                   <ComboBox fx:id="cmbLocation" prefHeight="25.0" prefWidth="203.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                </children>
                <GridPane.margin>
@@ -167,24 +176,33 @@
                               <Insets bottom="5.0" left="20.0" top="10.0" />
                            </HBox.margin>
                            <children>
-                              <VBox alignment="TOP_CENTER" prefHeight="120.0" prefWidth="261.0">
+                              <VBox alignment="BOTTOM_CENTER" prefHeight="120.0" prefWidth="261.0">
                                  <children>
-                                    <Label alignment="CENTER" prefHeight="25.0" prefWidth="264.0" text="Art options" textFill="WHITE">
-                                       <font>
-                                          <Font name="System Bold" size="16.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets left="2.0" />
-                                       </padding>
-                                       <VBox.margin>
-                                          <Insets bottom="-15.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="261.0" translateX="-10.0">
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="25.0" prefWidth="189.0" text="Art options" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="2.0" />
+                                             </padding>
+                                          </Label>
+                                          <ImageView fx:id="btnResetPic" fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="floatingBtn">
+                                             <image>
+                                                <Image url="@erase.png" />
+                                             </image>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </ImageView>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="33.0" prefWidth="261.0" translateX="-10.0">
                                        <children>
                                           <TextField fx:id="txtPic" editable="false" minWidth="100.0" prefHeight="25.0" prefWidth="132.0">
                                              <cursor>
-                                                <Cursor fx:constant="DEFAULT" />
+                                                <Cursor fx:constant="CROSSHAIR" />
                                              </cursor>
                                              <opaqueInsets>
                                                 <Insets />
@@ -263,7 +281,12 @@
       </GridPane>
       <HBox alignment="CENTER_RIGHT" VBox.vgrow="ALWAYS">
          <children>
-            <ImageView fx:id="imgGuiArt2" fitHeight="130.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8" smooth="false" translateY="8.0">
+            <ImageView fx:id="btnRandomChars" fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="floatingBtn" translateX="40.0" translateY="-30.0">
+               <image>
+                  <Image url="@refresh.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgGuiArt2" fitHeight="80.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8" smooth="false">
                <image>
                   <Image url="@art2.png" />
                </image>
@@ -271,26 +294,26 @@
                   <Insets left="40.0" />
                </HBox.margin>
             </ImageView>
-            <ImageView fx:id="imgGuiArt" fitHeight="150.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8" smooth="false" translateY="-3.0">
+            <ImageView fx:id="imgGuiArt" fitHeight="80.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8" smooth="false">
                <image>
-                  <Image url="@art.png" />
+                  <Image url="@art1.png" />
                </image>
                <HBox.margin>
                   <Insets right="-5.0" />
                </HBox.margin>
             </ImageView>
-            <ImageView fx:id="imgGuiArt3" fitHeight="150.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8" smooth="false" translateY="-1.0">
+            <ImageView fx:id="imgGuiArt3" fitHeight="80.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8" smooth="false" translateY="-1.0">
                <image>
                   <Image url="@art3.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgGuiArt5" fitHeight="59.0" fitWidth="223.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgGuiArt5" fitHeight="83.0" fitWidth="223.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                <image>
                   <Image url="@logo.png" />
                </image>
             </ImageView>
-            <Label text="v1.1" textFill="WHITE" />
-            <ImageView fx:id="imgGuiArt4" fitHeight="150.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8" smooth="false">
+            <Label fx:id="lblVersion" text="v1.2" textFill="WHITE" />
+            <ImageView fx:id="imgGuiArt4" fitHeight="80.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8" smooth="false">
                <image>
                   <Image url="@art4.png" />
                </image>
@@ -306,7 +329,10 @@
                   <Insets />
                </HBox.margin>
             </Label>
-            <ComboBox fx:id="cmbOptions" prefHeight="35.0" prefWidth="59.0" />
+            <ComboBox fx:id="cmbOptions" prefHeight="35.0" prefWidth="59.0" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></ComboBox>
             <Button fx:id="btnCLear" mnemonicParsing="false" style="-fx-background-color: black; -fx-text-fill: white; -fx-border-color: white; -fx-border-width: 3px;" styleClass="loadPic" stylesheets="@styles.css" text="Clear all input">
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -561,7 +587,7 @@
                         </TabPane>
                      </children>
                   </VBox>
-                  <VBox fx:id="optionB" alignment="CENTER" prefHeight="406.0" prefWidth="407.0" style="-fx-background-color: black;" HBox.hgrow="SOMETIMES">
+                  <VBox fx:id="optionB" alignment="CENTER" prefHeight="391.0" prefWidth="407.0" style="-fx-background-color: black;" HBox.hgrow="SOMETIMES">
                      <children>
                         <GridPane>
                            <columnConstraints>
@@ -948,7 +974,7 @@
             </HBox>
          </content>
       </ScrollPane>
-      <ImageView fx:id="band2" fitHeight="25.0" fitWidth="1309.0" pickOnBounds="true" preserveRatio="true" scaleZ="0.0" smooth="false" VBox.vgrow="ALWAYS">
+      <ImageView fx:id="band2" fitHeight="25.0" fitWidth="1309.0" pickOnBounds="true" preserveRatio="true" scaleZ="0.0" smooth="false" translateY="-8.0" VBox.vgrow="ALWAYS">
          <image>
             <Image url="@line.png" />
          </image>
