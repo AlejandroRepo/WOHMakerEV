@@ -6,13 +6,11 @@ Download link:  <b>[Download WOHMaker 1.2](WOHMaker1.2.zip?raw=true)</b>
 
 ![wohmakert](wohmaker.png)
 
-**Version 1.1:**
-- Improved overall visuals and layout for better legibility
-- Fixed most ui issues
-- Corrected names for items and spells.
-- removed global location (currently not working in woh)
-- Option controls will be automatically cleaned when disabling the option or reading from file.
-- Improved behaviour of options tabs
+**Version 1.2:**
+- Corrected an issue which prevented events without art to be saved.
+- Improved layout and UI elements.
+- Added button to reset art to default.
+- Other fixes and tweaks.
 
 Features:
 
