@@ -10,3 +10,5 @@ B
 EventMaker/pom.xml,9\5\95891023a979b82163336a4abf63bf63bf109ce3
 c
 3EventMaker/src/main/java/eventmaker/Controller.java,d\1\d15025504da5087372843da8a536052a3a617478
+]
+-.idea/fileTemplates/includes/File Header.java,9\6\96424ae5094fc03568c3dd099d4dd3de8003db26

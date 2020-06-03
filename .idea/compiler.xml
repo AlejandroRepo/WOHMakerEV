@@ -21,13 +21,11 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="EventMaker" target="11" />
-      <module name="EventViewer" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="EventMaker" options="--add-exports=org.controlsfx.controls/impl.org.controlsfx.autocompletion=EventMaker" />
-      <module name="EventViewer" options="--add-exports --org.controlsfx.controls/impl.org.controlsfx.autocompletion=EventViewer" />
     </option>
   </component>
 </project>
