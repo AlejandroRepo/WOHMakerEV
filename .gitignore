@@ -1,2 +1,4 @@
 /EventMaker/target/
 *.iml
+*.class
+/.idea/
