@@ -95,18 +95,18 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox prefHeight="88.0" prefWidth="491.0" GridPane.columnIndex="3" GridPane.rowSpan="2">
+                  <HBox prefHeight="88.0" prefWidth="491.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowSpan="2">
                      <children>
-                        <AnchorPane fx:id="helpArea" prefHeight="83.0" prefWidth="84.0" style="-fx-border-color: white; -fx-border-width: 4px;" translateY="-4.0">
+                        <AnchorPane fx:id="helpArea" style="-fx-border-color: white; -fx-border-width: 4px;" translateY="-4.0">
                            <children>
-                              <ImageView fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" smooth="false" translateX="3.0" translateY="4.0">
+                              <ImageView fitHeight="150.0" fitWidth="80.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="false" translateX="3.0" translateY="4.0">
                                  <image>
                                     <Image url="@help2.png" />
                                  </image>
                               </ImageView>
                            </children>
                         </AnchorPane>
-                        <TextArea fx:id="helpAreatxt" maxHeight="116.0" maxWidth="428.0" prefHeight="88.0" prefWidth="382.0" promptText="Help will appear here..." style="-fx-background-color: black;" styleClass="helpArea" stylesheets="@styles.css" translateY="-4.0" wrapText="true">
+                        <TextArea fx:id="helpAreatxt" maxHeight="116.0" maxWidth="435.0" mouseTransparent="true" prefHeight="88.0" prefWidth="236.0" promptText="Help will appear here..." style="-fx-background-color: black;" styleClass="helpArea" stylesheets="@styles.css" translateY="-4.0" wrapText="true" HBox.hgrow="ALWAYS">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -117,19 +117,31 @@
                               <Cursor fx:constant="CROSSHAIR" />
                            </cursor>
                         </TextArea>
-                        <ImageView fx:id="imgBack" fitHeight="150.0" fitWidth="300.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" scaleY="0.8" smooth="false" translateX="80.0" translateY="-18.0" translateZ="-5.0" visible="false">
+                        <ImageView fx:id="imgBack" blendMode="DIFFERENCE" fitHeight="500.0" fitWidth="1000.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" smooth="false" translateX="-160.0" translateY="-25.0" translateZ="15.0" visible="false">
                            <image>
                               <Image url="@back.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="btnHideHelp" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" smooth="false" styleClass="floatingBtn">
-                           <image>
-                              <Image url="@CLOSE.png" />
-                           </image>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </ImageView>
+                        <VBox prefHeight="200.0" style="-fx-spacing: 10;">
+                           <children>
+                              <ImageView fx:id="btnHideHelp" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" smooth="false" styleClass="floatingBtn">
+                                 <image>
+                                    <Image url="@CLOSE.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                              <ImageView fx:id="showWarn" fitHeight="20.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" smooth="false" styleClass="floatingBtn" translateX="3.0" visible="false">
+                                 <image>
+                                    <Image url="@warnings.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </VBox>
                      </children>
                      <padding>
                         <Insets bottom="15.0" />
@@ -143,11 +155,11 @@
             </GridPane>
             <HBox alignment="BOTTOM_LEFT" prefHeight="217.0" prefWidth="1311.0" GridPane.rowIndex="1">
                <children>
-                  <HBox alignment="CENTER" prefHeight="165.0" prefWidth="1449.0" HBox.hgrow="ALWAYS">
+                  <HBox alignment="TOP_CENTER" prefHeight="165.0" prefWidth="1449.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox>
+                        <VBox alignment="TOP_CENTER">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="TOP" prefHeight="25.0" prefWidth="613.0" text="Flavour" textFill="WHITE">
+                              <Label alignment="CENTER" contentDisplay="TOP" prefHeight="25.0" prefWidth="677.0" text="Flavour" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="16.0" />
                                  </font>
@@ -162,7 +174,7 @@
                                           <Font name="System Italic" size="16.0" />
                                        </font>
                                     </TextArea>
-                                    <Label fx:id="lblTooLong" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="19.0" prefWidth="628.0" text="Probably too long!" textFill="RED" visible="false">
+                                    <Label fx:id="lblTooLong" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="19.0" prefWidth="628.0" text="Probably too long!" textFill="#ff40ff" visible="false">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
@@ -171,14 +183,14 @@
                               </VBox>
                            </children>
                         </VBox>
-                        <HBox alignment="CENTER_LEFT" maxHeight="231.0" minHeight="150.0" prefHeight="150.0" prefWidth="268.0" style="-fx-translate-y: 10;" translateX="-30.0" translateY="-5.0">
+                        <HBox alignment="TOP_CENTER" maxHeight="231.0" minHeight="150.0" prefHeight="150.0" prefWidth="268.0" style="-fx-translate-y: 10;" translateX="-30.0" translateY="-5.0">
                            <HBox.margin>
                               <Insets bottom="5.0" left="20.0" top="10.0" />
                            </HBox.margin>
                            <children>
                               <VBox alignment="BOTTOM_CENTER" prefHeight="120.0" prefWidth="261.0">
                                  <children>
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                    <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
                                           <Label alignment="CENTER" prefHeight="25.0" prefWidth="189.0" text="Art options" textFill="WHITE">
                                              <font>
@@ -198,17 +210,17 @@
                                           </ImageView>
                                        </children>
                                     </HBox>
-                                    <HBox alignment="CENTER" prefHeight="33.0" prefWidth="261.0" translateX="-10.0">
+                                    <HBox alignment="CENTER" prefHeight="161.0" prefWidth="261.0" style="-fx-background-color: black;" translateX="-10.0">
                                        <children>
                                           <TextField fx:id="txtPic" editable="false" minWidth="100.0" prefHeight="25.0" prefWidth="132.0">
                                              <cursor>
-                                                <Cursor fx:constant="CROSSHAIR" />
+                                                <Cursor fx:constant="DEFAULT" />
                                              </cursor>
                                              <opaqueInsets>
                                                 <Insets />
                                              </opaqueInsets>
                                           </TextField>
-                                          <Button fx:id="btnLoadPic" minWidth="100.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="102.0" style="-fx-background-color: black; -fx-text-fill: white; -fx-border-color: white; -fx-border-width: 3px;" styleClass="loadPic" text="Load">
+                                          <Button fx:id="btnLoadPic" alignment="TOP_CENTER" maxHeight="10.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="102.0" style="-fx-background-color: black; -fx-text-fill: white; -fx-border-color: white; -fx-border-width: 3px;" styleClass="loadPic" text="Load">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
@@ -218,7 +230,7 @@
                                           <Insets left="20.0" top="20.0" />
                                        </padding>
                                     </HBox>
-                                    <HBox alignment="CENTER" prefHeight="28.0" prefWidth="261.0" spacing="5.0">
+                                    <HBox alignment="TOP_CENTER" prefHeight="28.0" prefWidth="261.0" spacing="5.0">
                                        <children>
                                           <CheckBox fx:id="chkBigArt" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" text="Big" textAlignment="CENTER" textFill="WHITE">
                                              <HBox.margin>
@@ -237,7 +249,7 @@
                                           </Label>
                                        </children>
                                     </HBox>
-                                    <Label fx:id="lblImgWarn" contentDisplay="CENTER" prefHeight="17.0" prefWidth="432.0" style="-fx-alignment: center;" text="Warning" textFill="RED" visible="false">
+                                    <Label fx:id="lblImgWarn" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="432.0" style="-fx-alignment: center;" text="Warning" textFill="#ff40ff" visible="false">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
@@ -279,14 +291,14 @@
             <Insets bottom="20.0" top="25.0" />
          </padding>
       </GridPane>
-      <HBox alignment="CENTER_RIGHT" VBox.vgrow="ALWAYS">
+      <HBox alignment="CENTER_RIGHT" prefHeight="74.0" prefWidth="887.0" VBox.vgrow="ALWAYS">
          <children>
             <ImageView fx:id="btnRandomChars" fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="floatingBtn" translateX="40.0" translateY="-30.0">
                <image>
                   <Image url="@refresh.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgGuiArt2" fitHeight="80.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8" smooth="false">
+            <ImageView fx:id="imgGuiArt2" fitHeight="80.0" fitWidth="55.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8" smooth="false">
                <image>
                   <Image url="@art2.png" />
                </image>
@@ -294,7 +306,7 @@
                   <Insets left="40.0" />
                </HBox.margin>
             </ImageView>
-            <ImageView fx:id="imgGuiArt" fitHeight="80.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8" smooth="false">
+            <ImageView fx:id="imgGuiArt" fitHeight="80.0" fitWidth="55.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8" smooth="false">
                <image>
                   <Image url="@art1.png" />
                </image>
@@ -302,18 +314,18 @@
                   <Insets right="-5.0" />
                </HBox.margin>
             </ImageView>
-            <ImageView fx:id="imgGuiArt3" fitHeight="80.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8" smooth="false" translateY="-1.0">
+            <ImageView fx:id="imgGuiArt3" fitHeight="80.0" fitWidth="55.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8" smooth="false" translateY="-1.0">
                <image>
                   <Image url="@art3.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgGuiArt5" fitHeight="83.0" fitWidth="223.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+            <ImageView fx:id="imgGuiArt5" fitHeight="83.0" fitWidth="223.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="false">
                <image>
                   <Image url="@logo.png" />
                </image>
             </ImageView>
-            <Label fx:id="lblVersion" text="v1.2" textFill="WHITE" />
-            <ImageView fx:id="imgGuiArt4" fitHeight="80.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8" smooth="false">
+            <Label fx:id="lblVersion" prefHeight="17.0" prefWidth="40.0" text="v1.2" textFill="WHITE" />
+            <ImageView fx:id="imgGuiArt4" fitHeight="80.0" fitWidth="55.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8" smooth="false">
                <image>
                   <Image url="@art4.png" />
                </image>
@@ -326,20 +338,23 @@
                   <Font name="System Bold" size="17.0" />
                </font>
                <HBox.margin>
-                  <Insets />
+                  <Insets top="17.0" />
                </HBox.margin>
             </Label>
             <ComboBox fx:id="cmbOptions" prefHeight="35.0" prefWidth="59.0" HBox.hgrow="ALWAYS">
                <HBox.margin>
-                  <Insets />
+                  <Insets top="17.0" />
                </HBox.margin></ComboBox>
-            <Button fx:id="btnCLear" mnemonicParsing="false" style="-fx-background-color: black; -fx-text-fill: white; -fx-border-color: white; -fx-border-width: 3px;" styleClass="loadPic" stylesheets="@styles.css" text="Clear all input">
+            <Button fx:id="btnCLear" mnemonicParsing="false" prefHeight="57.0" prefWidth="152.0" style="-fx-background-color: black; -fx-text-fill: white; -fx-border-color: white; -fx-border-width: 3px;" styleClass="loadPic" stylesheets="@styles.css" text="Clear all input">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <HBox.margin>
-                  <Insets left="5.0" />
+                  <Insets left="5.0" top="17.0" />
                </HBox.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </Button>
          </children>
          <VBox.margin>
@@ -354,7 +369,7 @@
             <Insets top="5.0" />
          </VBox.margin>
          <content>
-            <HBox fx:id="optionsBar" alignment="CENTER" style="-fx-spacing: 8px; -fx-background-color: black;">
+            <HBox fx:id="optionsBar" alignment="CENTER" prefHeight="408.0" prefWidth="1237.0" style="-fx-spacing: 8px; -fx-background-color: black;">
                <children>
                   <VBox fx:id="optionA" alignment="CENTER" prefHeight="406.0" prefWidth="407.0" style="-fx-background-color: black;" HBox.hgrow="SOMETIMES">
                      <children>
@@ -396,9 +411,9 @@
                               <Insets left="15.0" right="15.0" />
                            </padding>
                         </GridPane>
-                        <TabPane prefHeight="297.0" prefWidth="377.0" tabClosingPolicy="UNAVAILABLE">
+                        <TabPane prefHeight="297.0" prefWidth="377.0" style="-fx-tab-min-width: 168;" tabClosingPolicy="UNAVAILABLE">
                            <tabs>
-                              <Tab closable="false" text="Success">
+                              <Tab fx:id="tabSuccessA" closable="false" text="Success">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="297.0" prefWidth="377.0">
                                        <children>
@@ -409,7 +424,7 @@
                                                       <Font size="16.0" />
                                                    </font>
                                                 </Label>
-                                                <TextArea fx:id="txtSuccessA" prefHeight="155.0" prefWidth="377.0" wrapText="true">
+                                                <TextArea fx:id="txtSuccessA" prefHeight="177.0" prefWidth="377.0" styleClass="optionText" wrapText="true">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
@@ -417,7 +432,7 @@
                                                       <Insets />
                                                    </VBox.margin>
                                                 </TextArea>
-                                                <Label fx:id="lblAS" alignment="CENTER" prefHeight="17.0" prefWidth="649.0" text="Probably too long!" textFill="RED" visible="false">
+                                                <Label fx:id="lblAS" alignment="CENTER" prefHeight="17.0" prefWidth="649.0" text="Probably too long!" textFill="#ff40ff" visible="false">
                                                    <font>
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
@@ -434,7 +449,7 @@
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                    </rowConstraints>
                                                    <children>
-                                                      <TextField fx:id="txtRewardA" alignment="CENTER" disable="true" prefHeight="25.0" prefWidth="155.0" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                                                      <TextField fx:id="txtRewardA" alignment="BOTTOM_CENTER" disable="true" prefHeight="25.0" prefWidth="155.0" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                                                          <GridPane.margin>
                                                             <Insets />
                                                          </GridPane.margin>
@@ -500,7 +515,7 @@
                                                       <Font size="16.0" />
                                                    </font>
                                                 </Label>
-                                                <TextArea fx:id="txtFailureA" prefHeight="136.0" prefWidth="377.0" wrapText="true">
+                                                <TextArea fx:id="txtFailureA" prefHeight="160.0" prefWidth="377.0" styleClass="optionText" wrapText="true">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
@@ -508,7 +523,7 @@
                                                       <Insets />
                                                    </VBox.margin>
                                                 </TextArea>
-                                                <Label fx:id="lblAS1" alignment="CENTER" prefHeight="17.0" prefWidth="649.0" text="Probably too long!" textFill="RED" visible="false">
+                                                <Label fx:id="lblAF" alignment="CENTER" prefHeight="17.0" prefWidth="649.0" text="Probably too long!" textFill="#ff40ff" visible="false">
                                                    <font>
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
@@ -624,9 +639,9 @@
                               <Insets left="15.0" right="15.0" />
                            </padding>
                         </GridPane>
-                        <TabPane prefHeight="297.0" prefWidth="377.0" tabClosingPolicy="UNAVAILABLE">
+                        <TabPane prefHeight="297.0" prefWidth="377.0" style="-fx-tab-min-width: 168;" tabClosingPolicy="UNAVAILABLE">
                            <tabs>
-                              <Tab closable="false" text="Success">
+                              <Tab fx:id="tabSuccessB" closable="false" text="Success">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="297.0" prefWidth="377.0">
                                        <children>
@@ -637,12 +652,12 @@
                                                       <Font size="16.0" />
                                                    </font>
                                                 </Label>
-                                                <TextArea fx:id="txtSuccessB" prefHeight="136.0" prefWidth="377.0" wrapText="true">
+                                                <TextArea fx:id="txtSuccessB" prefHeight="160.0" prefWidth="377.0" styleClass="optionText" wrapText="true">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
                                                 </TextArea>
-                                                <Label fx:id="lblBS" alignment="CENTER" prefHeight="17.0" prefWidth="443.0" text="Probably too long!" textFill="RED" visible="false">
+                                                <Label fx:id="lblBS" alignment="CENTER" prefHeight="17.0" prefWidth="443.0" text="Probably too long!" textFill="#ff40ff" visible="false">
                                                    <font>
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
@@ -713,12 +728,12 @@
                                                       <Font size="16.0" />
                                                    </font>
                                                 </Label>
-                                                <TextArea fx:id="txtFailureB" prefHeight="136.0" prefWidth="377.0" wrapText="true">
+                                                <TextArea fx:id="txtFailureB" prefHeight="160.0" prefWidth="377.0" styleClass="optionText" wrapText="true">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
                                                 </TextArea>
-                                                <Label fx:id="lblBD" alignment="CENTER" prefHeight="17.0" prefWidth="443.0" text="Probably too long!" textFill="RED" visible="false" />
+                                                <Label fx:id="lblBD" alignment="CENTER" prefHeight="17.0" prefWidth="443.0" text="Probably too long!" textFill="#ff40ff" visible="false" />
                                                 <GridPane alignment="CENTER" vgap="5.0">
                                                    <columnConstraints>
                                                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -813,9 +828,9 @@
                               <Insets left="15.0" right="15.0" />
                            </padding>
                         </GridPane>
-                        <TabPane prefHeight="297.0" prefWidth="377.0" tabClosingPolicy="UNAVAILABLE">
+                        <TabPane prefHeight="297.0" prefWidth="377.0" style="-fx-tab-min-width: 168;" tabClosingPolicy="UNAVAILABLE">
                            <tabs>
-                              <Tab closable="false" text="Success">
+                              <Tab fx:id="tabSuccessC" closable="false" text="Success">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="297.0" prefWidth="377.0">
                                        <children>
@@ -826,12 +841,12 @@
                                                       <Font size="16.0" />
                                                    </font>
                                                 </Label>
-                                                <TextArea fx:id="txtSuccessC" prefHeight="136.0" prefWidth="377.0" wrapText="true">
+                                                <TextArea fx:id="txtSuccessC" prefHeight="160.0" prefWidth="377.0" styleClass="optionText" wrapText="true">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
                                                 </TextArea>
-                                                <Label fx:id="lblCS" alignment="CENTER" prefHeight="17.0" prefWidth="443.0" text="Probably too long!" textFill="RED" visible="false">
+                                                <Label fx:id="lblCS" alignment="CENTER" prefHeight="17.0" prefWidth="443.0" text="Probably too long!" textFill="#ff40ff" visible="false">
                                                    <font>
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
@@ -894,12 +909,12 @@
                                                       <Font size="16.0" />
                                                    </font>
                                                 </Label>
-                                                <TextArea fx:id="txtFailureC" prefHeight="136.0" prefWidth="377.0" wrapText="true">
+                                                <TextArea fx:id="txtFailureC" prefHeight="160.0" prefWidth="377.0" styleClass="optionText" wrapText="true">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
                                                 </TextArea>
-                                                <Label fx:id="lblCF" alignment="CENTER" prefHeight="17.0" prefWidth="443.0" text="Probably too long!" textFill="RED" visible="false">
+                                                <Label fx:id="lblCF" alignment="CENTER" prefHeight="17.0" prefWidth="443.0" text="Probably too long!" textFill="#ff40ff" visible="false">
                                                    <font>
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>

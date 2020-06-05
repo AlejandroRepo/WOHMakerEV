@@ -10,6 +10,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -94,7 +95,7 @@ public class Controller implements Initializable {
 
     List<String> visualEffectsList = Arrays.asList("none", "whiteflash", "bloodsplat");
 
-    public final static String VERSION = "1.2";
+    public static final String VERSION = "1.3";
 
     Image eventArt;
 
@@ -265,6 +266,9 @@ public class Controller implements Initializable {
     TextField txtOptionA;
 
     @FXML
+    ImageView showWarn;
+
+    @FXML
     TextField txtOptionB;
 
     @FXML
@@ -355,9 +359,6 @@ public class Controller implements Initializable {
     Hyperlink linkRepo;
 
     @FXML
-    ImageView lowerBand;
-
-    @FXML
     Button btnCLear;
 
     @FXML
@@ -382,6 +383,15 @@ public class Controller implements Initializable {
     Label lblCF;
 
     @FXML
+    Tab tabSuccessA;
+
+    @FXML
+    Tab tabSuccessB;
+
+    @FXML
+    Tab tabSuccessC;
+
+    @FXML
     ImageView btnRandomChars;
 
     @FXML
@@ -393,7 +403,7 @@ public class Controller implements Initializable {
     @FXML
     VBox root;
 
-    Dialog imageViewDialog = new Dialog();
+    Dialog imageViewDialog = new Dialog<>();
 
     String currentImage = "";
 
@@ -417,7 +427,8 @@ public class Controller implements Initializable {
         this.comboVisual.addAll(Arrays.asList(this.cmbVisualA, this.cmbVisualAF, this.cmbVisualB, this.cmbVisualBF,
                 this.cmbVisualC, this.cmbVisualCF));
         this.comboChecks.addAll(Arrays.asList(this.comboCheckA, this.comboCheckB, this.comboCheckC));
-        this.lblWarnings.addAll(Arrays.asList(this.lblAS, this.lblAF, this.lblBS, this.lblBD, this.lblCS, this.lblCF));
+        this.lblWarnings.addAll(Arrays.asList(this.lblAS, this.lblAF, this.lblBS, this.lblBD, this.lblCS, this.lblCF,
+                this.lblImgWarn, this.lblTooLong));
         this.txtExtraRewards.addAll(
                 Arrays.asList(this.txtExtraRewardA, this.txtExtraRewardAF, this.txtExtraRewardB, this.txtExtraRewardBF,
                         this.txtExtraRewardC, this.txtExtraRewardCF));
@@ -452,11 +463,14 @@ public class Controller implements Initializable {
         final List<ImageView> chars = Arrays.asList(this.imgGuiArt, this.imgGuiArt2, this.imgGuiArt3, this.imgGuiArt4);
 
         for (int i = 1; i < chars.size() + 1; i++) {
-            dice = new Random().nextInt(3);
+            dice = new Random().nextInt(5);
             chars.get(i - 1)
                 .setImage(new Image(
-                        dice == 0 ? "/art" + i + "c.png"
-                                : dice == 1 ? "/art" + i + "b.png" : "/art" + i + ".png"));
+                        dice == 0 ? "/art" + i + ".png"
+                                : dice == 1 ? "/art" + i + "b.png"
+                                        : dice == 2 ? "/art" + i + "c.png"
+                                                : dice == 3 ? "/art" + i + "d.png"
+                                                        : "/art" + i + "e.png"));
 
         }
 
@@ -485,6 +499,7 @@ public class Controller implements Initializable {
             this.optionC.setDisable(newValue.equals("1") || newValue.equals("2"));
         });
 
+
         smallScreenMode.addListener((ob, old, newValue) -> {
             this.band1.setManaged(!newValue);
             this.band1.setVisible(!newValue);
@@ -508,10 +523,9 @@ public class Controller implements Initializable {
         }
 
         tempWarnList.forEach(pair -> pair.getValue().textProperty().addListener((ob, old, newValue) -> {
-            try {
-                pair.getKey().setVisible(newValue.length() > 300);
-            } catch (final NullPointerException e) {
-
+            pair.getKey().setVisible(newValue.length() > 300);
+            if (pair.getKey().isVisible()) {
+                this.showWarn.setVisible(true);
             }
         }));
 
@@ -622,6 +636,9 @@ public class Controller implements Initializable {
      * Implements button logic
      */
 
+    Path imgPath = Paths.get(System.getProperty("user.home"), "AppData", "Local", "wohgame");
+
+    Path filePath = Paths.get(System.getProperty("user.home"), "AppData", "Local", "wohgame");
 
     void installHandlers() {
 
@@ -637,6 +654,17 @@ public class Controller implements Initializable {
             } catch (final IOException e) {
                 e.printStackTrace();
             }
+        });
+
+        this.showWarn.setOnMouseClicked(evt -> {
+
+            this.lblWarnings.forEach(lbl -> {
+                if (!Objects.isNull(lbl)) {
+                    lbl.setVisible(false);
+                }
+            });
+
+            this.showWarn.setVisible(false);
         });
 
         this.btnCLear.setOnAction(evt -> {
@@ -678,8 +706,7 @@ public class Controller implements Initializable {
 
             try {
                 fileChooser = new FileChooser();
-                fileChooser.setInitialDirectory(
-                        Paths.get(System.getProperty("user.home"), "AppData", "Local", "wohgame").toFile());
+                fileChooser.setInitialDirectory(this.imgPath.toFile());
                 fileChooser.getExtensionFilters()
                     .setAll(new FileChooser.ExtensionFilter("Image files", "*.png", "*.bmp", "*.gif"));
                 fileChooser.setTitle("Select custom event art");
@@ -696,6 +723,7 @@ public class Controller implements Initializable {
                 this.imgArt.setImage(new Image(img.toURI().toString()));
                 this.eventArt = this.imgArt.getImage();
                 this.doImageCalculations();
+                this.imgPath = Paths.get(img.getParentFile().toURI());
             }
         });
 
@@ -800,8 +828,7 @@ public class Controller implements Initializable {
 
             try {
                 fileChooser = new FileChooser();
-                fileChooser.setInitialDirectory(
-                        Paths.get(System.getProperty("user.home"), "AppData", "Local", "wohgame").toFile());
+                fileChooser.setInitialDirectory(this.filePath.toFile());
                 fileChooser.getExtensionFilters().setAll((new FileChooser.ExtensionFilter("ITO files", "*.ito")));
                 fileChooser.setTitle("Select custom event file");
                 ito = fileChooser.showOpenDialog(this.btnLoadPic.getScene().getWindow());
@@ -813,6 +840,7 @@ public class Controller implements Initializable {
 
             if (!Objects.isNull(ito)) {
                 this.loadIto(ito);
+                this.filePath = Paths.get(ito.getParentFile().toURI());
             }
         });
     }
@@ -944,7 +972,12 @@ public class Controller implements Initializable {
             this.imgArt.setFitWidth(279);
             this.imgArt.setTranslateY(0);
             this.imgArt.setTranslateX(0);
-            this.lblImgWarn.setText("Image resolution doesn't seem correct");
+            if (this.eventArt.isError()) {
+                this.lblImgWarn.setText("Image couldn't be found!");
+                this.imgArt.setImage(new Image("/notfound.png"));
+            } else {
+                this.lblImgWarn.setText("IMG resolution doesn't seem correct.");
+            }
         }
     }
 
@@ -957,6 +990,8 @@ public class Controller implements Initializable {
     private static final String VISUALINFO = "Visual effect which will be triggered when this outcome is reached.";
 
     private static final String EXTRAREWARDSINFO = "Please use integers.";
+
+    private static final String OPTIONSINFO = "Use # for line breaks.";
 
     /**
      * Listens to mouse hover to fill the help panel.
@@ -984,7 +1019,7 @@ public class Controller implements Initializable {
         this.txtSuccessB.hoverProperty().addListener(inv -> this.helpAreatxt.setText("Outcome text."));
         this.txtSuccessC.hoverProperty().addListener(inv -> this.helpAreatxt.setText("Outcome text."));
         this.imgArt.hoverProperty()
-            .addListener(inv -> this.helpAreatxt.setText("CLick on the pic to show at higher scale."));
+            .addListener(inv -> this.helpAreatxt.setText("Click on the pic to show at higher scale."));
         this.txtPic.hoverProperty()
             .addListener(inv -> this.helpAreatxt.setText("The route and name which will appear on the .ito file."));
         this.linkRepo.hoverProperty()
@@ -1009,7 +1044,7 @@ public class Controller implements Initializable {
             .addListener(inv -> this.helpAreatxt
                 .setText("Event will be added to this location deck. God-dependant locations are global."));
         this.btnRandomChars.hoverProperty()
-            .addListener(inv -> this.helpAreatxt.setText("Randomizes ornamental arts."));
+            .addListener(inv -> this.helpAreatxt.setText("Randomize ornamental arts."));
         this.chkWavy.hoverProperty()
             .addListener(inv -> this.helpAreatxt.setText("If enabled, the art will undulate at the given speed."));
         this.sldWavy.hoverProperty()
@@ -1017,6 +1052,15 @@ public class Controller implements Initializable {
         this.chkBigArt.hoverProperty()
             .addListener(inv -> this.helpAreatxt
                 .setText("Big arts take the whole event screen. Will be selected automatically when loading a pic."));
+        this.txtOptionA.hoverProperty()
+            .addListener(inv -> this.helpAreatxt
+                .setText(OPTIONSINFO));
+        this.txtOptionB.hoverProperty()
+            .addListener(inv -> this.helpAreatxt
+                .setText(OPTIONSINFO));
+        this.txtOptionC.hoverProperty()
+            .addListener(inv -> this.helpAreatxt
+                .setText(OPTIONSINFO));
         this.btnLoadIto.hoverProperty()
             .addListener(inv -> this.helpAreatxt.setText("Loads an already created event and parses its contents."));
         this.btnSaveUser.hoverProperty()
@@ -1030,6 +1074,19 @@ public class Controller implements Initializable {
         this.btnSaveIto.hoverProperty()
             .addListener(inv -> this.helpAreatxt
                 .setText("Saves the event to disk as an .ito file. Put them in custom, sandbox or test sub-folders."));
+
+        this.showWarn.hoverProperty()
+            .addListener(inv -> this.helpAreatxt
+                .setText("Hides the warnings... \nbut they will be back."));
+
+        this.lblWarnings.forEach(lbl -> {
+            lbl.visibleProperty().addListener((ob, old, newValue) -> {
+                if (newValue) {
+                    this.showWarn.setVisible(true);
+                }
+            });
+        });
+
         this.txtExtraRewards
             .forEach(txt -> txt.hoverProperty().addListener(inv -> this.helpAreatxt.setText(EXTRAREWARDSINFO)));
         this.txtRewardList.forEach(txt -> txt.hoverProperty().addListener(inv -> this.helpAreatxt.setText(REWARDINFO)));
@@ -1235,25 +1292,34 @@ public class Controller implements Initializable {
                             this.chkWavy.setSelected(substring.equals("1"));
                         }
                         if (s.startsWith("wavy_speed")) {
-                            this.sldWavy.setValue(Double.parseDouble(substring));
+                            this.sldWavy.setValue(Double.parseDouble(substring.replace(',', '.')));
                         }
                         if (s.startsWith("optiona")) {
-                            this.txtOptionA.setText(substring.replace("#", "\n"));
+                            this.txtOptionA.setText(substring.replace("#", " "));
                         }
                         if (s.startsWith("optionb")) {
-                            this.txtOptionB.setText(substring.replace("#", "\n"));
+                            this.txtOptionB.setText(substring.replace("#", " "));
                         }
                         if (s.startsWith("optionc")) {
-                            this.txtOptionC.setText(substring.replace("#", "\n"));
+                            this.txtOptionC.setText(substring.replace("#", " "));
                         }
                         if (s.startsWith("testa")) {
                             this.comboCheckA.getSelectionModel().select(substring);
+                            if (substring.equals("story")) {
+                                this.tabSuccessA.getTabPane().getSelectionModel().select(0);
+                            }
                         }
                         if (s.startsWith("testb")) {
                             this.comboCheckB.getSelectionModel().select(substring);
+                            if (substring.equals("story")) {
+                                this.tabSuccessB.getTabPane().getSelectionModel().select(0);
+                            }
                         }
                         if (s.startsWith("testc")) {
                             this.comboCheckC.getSelectionModel().select(substring);
+                            if (substring.equals("story")) {
+                                this.tabSuccessC.getTabPane().getSelectionModel().select(0);
+                            }
                         }
                         if (s.startsWith("successa")) {
                             this.txtSuccessA.setText(substring.replace("#", "\n"));
@@ -1280,40 +1346,88 @@ public class Controller implements Initializable {
                             this.txtContact.setText(substring);
                         }
                         if (s.startsWith("winprizea")) {
-                            this.cmbRewardsA.getSelectionModel().select(substring);
+                            if (substring.isEmpty() || substring.isBlank()) {
+                                this.cmbRewardsA.getSelectionModel().select(0);
+                            } else {
+                                this.cmbRewardsA.getSelectionModel().select(substring);
+                            }
                         }
                         if (s.startsWith("winprizeb")) {
-                            this.cmbRewardsB.getSelectionModel().select(substring);
+                            if (substring.isEmpty() || substring.isBlank()) {
+                                this.cmbRewardsB.getSelectionModel().select(0);
+                            } else {
+                                this.cmbRewardsB.getSelectionModel().select(substring);
+                            }
                         }
                         if (s.startsWith("winprizec")) {
-                            this.cmbRewardsC.getSelectionModel().select(substring);
+                            if (substring.isEmpty() || substring.isBlank()) {
+                                this.cmbRewardsC.getSelectionModel().select(0);
+                            } else {
+                                this.cmbRewardsC.getSelectionModel().select(substring);
+                            }
                         }
                         if (s.startsWith("failprizea")) {
-                            this.cmbRewardsAF.getSelectionModel().select(substring);
+                            if (substring.isEmpty() || substring.isBlank()) {
+                                this.cmbRewardsAF.getSelectionModel().select(0);
+                            } else {
+                                this.cmbRewardsAF.getSelectionModel().select(substring);
+                            }
                         }
                         if (s.startsWith("failprizeb")) {
-                            this.cmbRewardsBF.getSelectionModel().select(substring);
+                            if (substring.isEmpty() || substring.isBlank()) {
+                                this.cmbRewardsBF.getSelectionModel().select(0);
+                            } else {
+                                this.cmbRewardsBF.getSelectionModel().select(substring);
+                            }
                         }
                         if (s.startsWith("failprizec")) {
-                            this.cmbRewardsCF.getSelectionModel().select(substring);
+                            if (substring.isEmpty() || substring.isBlank()) {
+                                this.cmbRewardsCF.getSelectionModel().select(0);
+                            } else {
+                                this.cmbRewardsCF.getSelectionModel().select(substring);
+                            }
                         }
                         if (s.startsWith("extra_winprizea")) {
-                            this.cmbExtraRewardsA.getSelectionModel().select(substring);
+                            if (substring.isEmpty() || substring.isBlank()) {
+                                this.cmbExtraRewardsA.getSelectionModel().select(0);
+                            } else {
+                                this.cmbExtraRewardsA.getSelectionModel().select(substring);
+                            }
                         }
                         if (s.startsWith("extra_winprizeb")) {
-                            this.cmbExtraRewardsB.getSelectionModel().select(substring);
+                            if (substring.isEmpty() || substring.isBlank()) {
+                                this.cmbExtraRewardsB.getSelectionModel().select(0);
+                            } else {
+                                this.cmbExtraRewardsB.getSelectionModel().select(substring);
+                            }
                         }
                         if (s.startsWith("extra_winprizec")) {
-                            this.cmbExtraRewardsC.getSelectionModel().select(substring);
+                            if (substring.isEmpty() || substring.isBlank()) {
+                                this.cmbExtraRewardsC.getSelectionModel().select(0);
+                            } else {
+                                this.cmbExtraRewardsC.getSelectionModel().select(substring);
+                            }
                         }
                         if (s.startsWith("extra_failprizea")) {
-                            this.cmbExtraRewardsAF.getSelectionModel().select(substring);
+                            if (substring.isEmpty() || substring.isBlank()) {
+                                this.cmbExtraRewardsAF.getSelectionModel().select(0);
+                            } else {
+                                this.cmbExtraRewardsAF.getSelectionModel().select(substring);
+                            }
                         }
                         if (s.startsWith("extra_failprizeb")) {
-                            this.cmbExtraRewardsBF.getSelectionModel().select(substring);
+                            if (substring.isEmpty() || substring.isBlank()) {
+                                this.cmbExtraRewardsBF.getSelectionModel().select(0);
+                            } else {
+                                this.cmbExtraRewardsBF.getSelectionModel().select(substring);
+                            }
                         }
                         if (s.startsWith("extra_failprizec")) {
-                            this.cmbExtraRewardsCF.getSelectionModel().select(substring);
+                            if (substring.isEmpty() || substring.isBlank()) {
+                                this.cmbExtraRewardsCF.getSelectionModel().select(0);
+                            } else {
+                                this.cmbExtraRewardsCF.getSelectionModel().select(substring);
+                            }
                         }
                         if (s.startsWith("winnumbera")) {
                             this.txtRewardA.setText(substring);
@@ -1352,22 +1466,46 @@ public class Controller implements Initializable {
                             this.txtExtraRewardC.setText(substring);
                         }
                         if (s.startsWith("wineffecta")) {
-                            this.cmbVisualA.getSelectionModel().select(substring);
+                            if (substring.isEmpty() || substring.isBlank()) {
+                                this.cmbVisualA.getSelectionModel().select(0);
+                            } else {
+                                this.cmbVisualA.getSelectionModel().select(substring);
+                            }
                         }
                         if (s.startsWith("wineffectb")) {
-                            this.cmbVisualB.getSelectionModel().select(substring);
+                            if (substring.isEmpty() || substring.isBlank()) {
+                                this.cmbVisualB.getSelectionModel().select(0);
+                            } else {
+                                this.cmbVisualB.getSelectionModel().select(substring);
+                            }
                         }
                         if (s.startsWith("wineffectc")) {
-                            this.cmbVisualC.getSelectionModel().select(substring);
+                            if (substring.isEmpty() || substring.isBlank()) {
+                                this.cmbVisualC.getSelectionModel().select(0);
+                            } else {
+                                this.cmbVisualC.getSelectionModel().select(substring);
+                            }
                         }
                         if (s.startsWith("faileffecta")) {
-                            this.cmbVisualAF.getSelectionModel().select(substring);
+                            if (substring.isEmpty() || substring.isBlank()) {
+                                this.cmbVisualAF.getSelectionModel().select(0);
+                            } else {
+                                this.cmbVisualAF.getSelectionModel().select(substring);
+                            }
                         }
                         if (s.startsWith("faileffectb")) {
-                            this.cmbVisualBF.getSelectionModel().select(substring);
+                            if (substring.isEmpty() || substring.isBlank()) {
+                                this.cmbVisualBF.getSelectionModel().select(0);
+                            } else {
+                                this.cmbVisualBF.getSelectionModel().select(substring);
+                            }
                         }
                         if (s.startsWith("faileffectc")) {
-                            this.cmbVisualCF.getSelectionModel().select(substring);
+                            if (substring.isEmpty() || substring.isBlank()) {
+                                this.cmbVisualCF.getSelectionModel().select(0);
+                            } else {
+                                this.cmbVisualCF.getSelectionModel().select(substring);
+                            }
                         }
                         if (s.startsWith("image")) {
                             this.currentImage = substring;
@@ -1396,7 +1534,7 @@ public class Controller implements Initializable {
             try (final BufferedWriter bufferedWriter = Files.newBufferedWriter(ito.toPath(),
                     Charset.defaultCharset())) {
 
-                if (this.txtPic.getText().isEmpty()
+                if (!this.txtPic.getText().isEmpty()
                         && Paths.get(ito.getParentFile().toPath().toString(), this.txtPic.getText())
                             .toFile()
                             .mkdirs()) {
@@ -1423,14 +1561,15 @@ public class Controller implements Initializable {
                                 "big=\"" + (this.chkBigArt.isSelected() ? "1" : "0") + "\"" + System.lineSeparator() +
                                 "wavy_art=\"" + (this.chkWavy.isSelected() ? "1" : "0") + "\"" + System.lineSeparator()
                                 +
-                                "wavy_speed=\"" + String.format("%.1f", this.sldWavy.getValue()) + "\""
+                                "wavy_speed=\"" + String.format("%.1f", this.sldWavy.getValue()).replace(',', '.')
+                                + "\""
                                 + System.lineSeparator()
                                 +
                                 "options=\"" + this.cmbOptions.getSelectionModel().getSelectedItem() + "\"" + System
                                     .lineSeparator()
                                 + System.lineSeparator() + System.lineSeparator() +
 
-                                "optiona=\"" + this.txtOptionA.getText().replace("\n", "#") + "\""
+                                "optiona=\"" + this.txtOptionA.getText() + "\""
                                 + System.lineSeparator() +
                                 "testa=\"" + this.comboCheckA.getSelectionModel().getSelectedItem() + "\"" + System
                                     .lineSeparator()
@@ -1478,7 +1617,7 @@ public class Controller implements Initializable {
                                 + "\"" + System.lineSeparator()
                                 + System.lineSeparator() + System.lineSeparator() +
 
-                                (numOptions > 1 ? "optionb=\"" + this.txtOptionB.getText().replace("\n", "#") + "\""
+                                (numOptions > 1 ? "optionb=\"" + this.txtOptionB.getText() + "\""
                                         + System.lineSeparator() +
                                         "testb=\"" + this.comboCheckB.getSelectionModel().getSelectedItem() + "\""
                                         + System
@@ -1528,7 +1667,7 @@ public class Controller implements Initializable {
                                         + "\"" + System.lineSeparator() : "")
                                 +
 
-                                (numOptions > 2 ? "optionc=\"" + this.txtOptionC.getText().replace("\n", "#") + "\""
+                                (numOptions > 2 ? "optionc=\"" + this.txtOptionC.getText() + "\""
                                         + System.lineSeparator() +
                                         "testc=\"" + this.comboCheckC.getSelectionModel().getSelectedItem() + "\""
                                         + System
