@@ -2,14 +2,16 @@
 
 World of Horror custom event creation tool.
 
-Download link:  <b>[Download WOHMaker 1.2](WOHMaker1.2.zip?raw=true)</b>
+Download link:  <b>[Download WOHMaker 1.2](WOHMaker1.3.zip?raw=true)</b>
 
 ![wohmakert](wohmaker.png)
 
-**Version 1.2:**
-- Corrected an issue which prevented events without art to be saved.
-- Improved layout and UI elements.
-- Added button to reset art to default.
+**Version 1.3:**
+- Improved behaviour when loading events.
+- Corrected an issue which could prevent pictures to be saved alongside event.
+- Better feedback when failing to load image.
+- Added button to hide all warnings.
+- Improved UI arts, layout and CSS styles.
 - Other fixes and tweaks.
 
 Features:
