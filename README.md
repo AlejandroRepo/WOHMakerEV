@@ -8,8 +8,8 @@ Download link:  <b>[Download WOHMaker 1.3b](WOHMaker1.3b.zip?raw=true)</b> [06/0
 
 **Version 1.3b:**
 - Now features a proper windows executable
-- Fixed lower white band
-- Fixed "image not found" img
+- Removed white band
+- Improved "image not found" img
 
 **Version 1.3:**
 - Improved behaviour when loading events.
