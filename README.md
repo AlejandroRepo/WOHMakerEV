@@ -19,6 +19,19 @@ Download link:  <b>[Download WOHMaker 1.3b](WOHMaker1.3b.zip?raw=true)</b> [06/0
 - Improved UI arts, layout and CSS styles.
 - Other fixes and tweaks.
 
+**Version 1.2:**
+- Corrected an issue which prevented events without art to be saved.
+- Improved layout and UI elements.
+- Added button to reset art to default.
+
+**Version 1.1:**
+- Improved overall visuals and layout for better legibility
+- Fixed most ui issues
+- Corrected names for items and spells.
+- removed global location (currently not working in woh)
+
+
+
 Features:
 
     Create, read, edit and save WOH's event files (.ito) easily.
