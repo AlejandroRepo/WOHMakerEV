@@ -1,7 +1,5 @@
 package eventmaker;
 
-import java.nio.file.Paths;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,26 +10,31 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    @Override
-    public void start(Stage primaryStage) throws Exception{
+    static String[] arguments;
 
-        Parent root = FXMLLoader.load(getClass().getResource("/gui.fxml"));
+    @Override
+    public void start(final Stage primaryStage) throws Exception {
+
+
+        final Parent root = FXMLLoader.load(this.getClass().getResource("/gui.fxml"));
         primaryStage.setTitle("WOH Maker");
         root.autosize();
         root.getStylesheets().add("/styles.css");
 
         primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/help.png")));
 
-        double width = Screen.getPrimary().getBounds().getWidth();
-        double height = Screen.getPrimary().getBounds().getHeight();
+        final double width = Screen.getPrimary().getBounds().getWidth();
+        final double height = Screen.getPrimary().getBounds().getHeight();
 
         primaryStage.setResizable(false);
 
-        if (width<1920 && height<1080){
-          primaryStage.setWidth(width-(width*0.05));
-          primaryStage.setHeight(height-(height*0.05));
-          Controller.setSmallScreenMode(true);
+        if (width < 1920 && height < 1080) {
+            primaryStage.setWidth(width - (width * 0.05));
+            primaryStage.setHeight(height - (height * 0.05));
+            Controller.setSmallScreenMode(true);
         }
+
+        Controller.setOpenWithPath(arguments);
 
         primaryStage.setScene(new Scene(root));
         primaryStage.getScene().getRoot().requestLayout();
@@ -41,7 +44,12 @@ public class Main extends Application {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
+        for (final String a : args) {
+            System.out.println(a);
+        }
+        arguments = args;
         launch(args);
     }
+
 }

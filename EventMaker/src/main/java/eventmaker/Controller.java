@@ -22,8 +22,11 @@ import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -61,7 +64,7 @@ public class Controller implements Initializable {
     List<String> locationsList = Arrays.asList("downtown", "apartment", "school", "hospital", "seaside", "forest",
             "mansion", "schoolhospital", "seasideforest", "village", "atorasu", "athyola", "gozu", "ithotu");
 
-    List<String> checksList = Arrays.asList("story", "strength", "dexterity", "perception", "knowledge", "luck",
+    List<String> checksList = Arrays.asList(STORY, "strength", "dexterity", "perception", "knowledge", "luck",
             "charisma", "funds1", "funds2");
 
     List<String> itemList = Arrays.asList("STEAK KNIFE", "CAMERA", "NICE RING", "KENDO HELMET", "SEWING KIT",
@@ -95,7 +98,13 @@ public class Controller implements Initializable {
 
     List<String> visualEffectsList = Arrays.asList("none", "whiteflash", "bloodsplat");
 
-    public static final String VERSION = "1.3";
+    public static final String VERSION = "1.4";
+
+    public static final String APPNAME = "WOHMaker";
+
+    public static final String USERHOME = System.getProperty("user.home");
+
+    public static final String STORY = "story";
 
     Image eventArt;
 
@@ -403,7 +412,7 @@ public class Controller implements Initializable {
     @FXML
     VBox root;
 
-    Dialog imageViewDialog = new Dialog<>();
+    Dialog<Object> imageViewDialog = new Dialog<>();
 
     String currentImage = "";
 
@@ -411,11 +420,11 @@ public class Controller implements Initializable {
 
     boolean forceFileRefresh = true;
 
-
     @Override
     public void initialize(final URL url, final ResourceBundle resourceBundle) {
 
         Font.loadFont(Controller.class.getResource("/Silver.ttf").toExternalForm(), 38);
+
         this.comboRewards
             .addAll(Arrays.asList(this.cmbRewardsA, this.cmbRewardsAF, this.cmbRewardsB, this.cmbRewardsBF,
                     this.cmbRewardsC, this.cmbRewardsCF));
@@ -441,7 +450,7 @@ public class Controller implements Initializable {
         this.btnLoadPic.setGraphic(new ImageView(new Image("/load.png")));
         this.btnSaveUser.setGraphic(new ImageView("/save.png"));
 
-        this.txtPic.addEventFilter(MouseEvent.MOUSE_CLICKED, evt -> evt.consume());
+        this.txtPic.addEventFilter(MouseEvent.MOUSE_CLICKED, Event::consume);
 
         this.readPrefs();
 
@@ -455,6 +464,15 @@ public class Controller implements Initializable {
         this.installHandlers();
         this.installListeners();
         this.implementHelpSystem();
+
+        path.addListener(inv -> {
+            for (final String s : path.get()) {
+                if (new File(s).exists()) {
+                    this.loadIto(new File(s));
+                }
+            }
+        });
+
     }
 
     void refreshChars() {
@@ -476,6 +494,21 @@ public class Controller implements Initializable {
 
     }
 
+    static ObjectProperty<String[]> path = new SimpleObjectProperty<>();
+
+    static void setOpenWithPath(final String[] args) {
+
+        path.set(args);
+        //
+        // for (final String s : args) {
+        // if (Paths.get(s).toFile().exists()) {
+        // path.set(Paths.get(s).toFile());
+        // }
+        // }
+
+
+    }
+
     /**
      * Listens to things happening and does things
      */
@@ -486,13 +519,13 @@ public class Controller implements Initializable {
             .addListener((ob, old, newValue) -> this.lblTooLong.setVisible(newValue.intValue() > 350));
         this.comboCheckA.getSelectionModel()
             .selectedItemProperty()
-            .addListener((ob, old, newValue) -> this.tabFailureA.setDisable(newValue.equals("story")));
+            .addListener((ob, old, newValue) -> this.tabFailureA.setDisable(newValue.equals(STORY)));
         this.comboCheckB.getSelectionModel()
             .selectedItemProperty()
-            .addListener((ob, old, newValue) -> this.tabFailureB.setDisable(newValue.equals("story")));
+            .addListener((ob, old, newValue) -> this.tabFailureB.setDisable(newValue.equals(STORY)));
         this.comboCheckC.getSelectionModel()
             .selectedItemProperty()
-            .addListener((ob, old, newValue) -> this.tabFailureC.setDisable(newValue.equals("story")));
+            .addListener((ob, old, newValue) -> this.tabFailureC.setDisable(newValue.equals(STORY)));
 
         this.cmbOptions.getSelectionModel().selectedItemProperty().addListener((ob, old, newValue) -> {
             this.optionB.setDisable(newValue.equals("1"));
@@ -509,9 +542,7 @@ public class Controller implements Initializable {
 
         this.cmbOptions.getSelectionModel().select(0);
 
-        this.txtPic.textProperty().addListener((ob, old, newValue) -> {
-            this.btnResetPic.setDisable(newValue.isEmpty());
-        });
+        this.txtPic.textProperty().addListener((ob, old, newValue) -> this.btnResetPic.setDisable(newValue.isEmpty()));
 
         final ArrayList<Pair<Label, TextArea>> tempWarnList = new ArrayList<>();
         final ArrayList<TextArea> optionStrings = new ArrayList<>(
@@ -519,13 +550,13 @@ public class Controller implements Initializable {
                         this.txtFailureC));
 
         for (int i = 0; i < this.comboRewards.size(); i++) {
-            tempWarnList.add(new Pair(this.lblWarnings.get(i), optionStrings.get(i)));
+            tempWarnList.add(new Pair<>(this.lblWarnings.get(i), optionStrings.get(i)));
         }
 
         tempWarnList.forEach(pair -> pair.getValue().textProperty().addListener((ob, old, newValue) -> {
             pair.getKey().setVisible(newValue.length() > 300);
             if (pair.getKey().isVisible()) {
-                this.showWarn.setVisible(true);
+                this.showWarn.setImage(new Image("/warnings.png"));
             }
         }));
 
@@ -534,7 +565,7 @@ public class Controller implements Initializable {
             this.lblWavyVal.setDisable(!newValue);
         });
         this.sldWavy.valueProperty()
-            .addListener((ob, old, newValue) -> this.lblWavyVal.setText(String.format("%.1f", newValue)));
+            .addListener((ob, old, newValue) -> this.lblWavyVal.setText(String.format("%.1f", newValue.floatValue())));
 
         this.btnExit.setOnAction(evt -> System.exit(0));
         this.txtAuthor.setOnKeyReleased(evt -> this.btnSaveUser.setDisable(false));
@@ -556,7 +587,7 @@ public class Controller implements Initializable {
         });
     }
 
-    File prefs = Paths.get(System.getProperty("user.home"), "WOHMaker", "prefs.dat").toFile();
+    File prefs = Paths.get(USERHOME, APPNAME, "prefs.dat").toFile();
 
 
     void setRewardsBehaviour() {
@@ -583,7 +614,7 @@ public class Controller implements Initializable {
                 this.refreshAutocompletion(txtField, "spells");
             } else if (selectedItem.equals("itempool")) {
                 this.refreshAutocompletion(txtField, "itempool");
-            } else if (new ArrayList(Arrays.asList("injury", "curse", "ally")).contains(selectedItem)) {
+            } else if (new ArrayList<>(Arrays.asList("injury", "curse", "ally")).contains(selectedItem)) {
                 this.refreshAutocompletion(txtField, "none");
                 txtField.setDisable(true);
                 txtField.setText("random");
@@ -636,14 +667,15 @@ public class Controller implements Initializable {
      * Implements button logic
      */
 
-    Path imgPath = Paths.get(System.getProperty("user.home"), "AppData", "Local", "wohgame");
+    Path imgPath = Paths.get(USERHOME, "AppData", "Local", "wohgame");
 
-    Path filePath = Paths.get(System.getProperty("user.home"), "AppData", "Local", "wohgame");
+    Path filePath = Paths.get(USERHOME, "AppData", "Local", "wohgame");
+
 
     void installHandlers() {
 
         this.btnSaveUser.setOnAction(evt -> {
-            final File author = Paths.get(System.getProperty("user.home"), "WOHMaker", "author.txt").toFile();
+            final File author = Paths.get(USERHOME, APPNAME, "author.txt").toFile();
             if (author.exists()) {
                 author.delete();
             }
@@ -664,7 +696,7 @@ public class Controller implements Initializable {
                 }
             });
 
-            this.showWarn.setVisible(false);
+            this.showWarn.setImage(new Image("/warningsb.png"));
         });
 
         this.btnCLear.setOnAction(evt -> {
@@ -673,7 +705,7 @@ public class Controller implements Initializable {
 
             this.imgArt.setImage(new Image("/admirer.png"));
             this.eventArt = new Image("/admirer.png");
-            final File author = Paths.get(System.getProperty("user.home"), "WOHMaker", "author.txt").toFile();
+            final File author = Paths.get(USERHOME, "WOHMaker", "author.txt").toFile();
 
             List<String> authorData = null;
             try {
@@ -713,8 +745,8 @@ public class Controller implements Initializable {
                 img = fileChooser.showOpenDialog(this.btnLoadPic.getScene().getWindow());
 
             } catch (final Exception e) {
-                fileChooser.setInitialDirectory(Paths.get(System.getProperty("user.home")).toFile());
-                fileChooser.setTitle("WOH Folder couldn't be located, please browser manually.");
+                fileChooser.setInitialDirectory(Paths.get(USERHOME).toFile());
+                fileChooser.setTitle(FOLDERNOTFOUND);
                 img = fileChooser.showOpenDialog(this.btnLoadPic.getScene().getWindow());
             }
 
@@ -749,12 +781,12 @@ public class Controller implements Initializable {
             try {
                 if (Desktop.isDesktopSupported()) {
                     Desktop.getDesktop()
-                        .browse(new URI("https://discord.com/channels/324155954059018240/690549472542851132"));
+                        .browse(new URI("https://discordapp.com/invite/bEPAtBY"));
                 } else {
                     // Ubuntu
                     final Runtime runtime = Runtime.getRuntime();
                     runtime.exec("/usr/bin/firefox -new-window "
-                            + "https://discord.com/channels/324155954059018240/690549472542851132");
+                            + "https://discordapp.com/invite/bEPAtBY");
                 }
             } catch (final IOException | URISyntaxException e) {
                 e.printStackTrace();
@@ -791,20 +823,20 @@ public class Controller implements Initializable {
             try {
                 fileChooser = new FileChooser();
                 fileChooser.setInitialDirectory(
-                        Paths.get(System.getProperty("user.home"), "AppData", "Local", "wohgame").toFile());
+                        Paths.get(USERHOME, "AppData", "Local", "wohgame").toFile());
                 fileChooser.getExtensionFilters().setAll((new FileChooser.ExtensionFilter("ITO files", "*.ito")));
                 fileChooser.setTitle("Save inside 'Custom', 'sandbox' or 'test'!");
                 ito = fileChooser.showSaveDialog(this.btnLoadPic.getScene().getWindow());
 
             } catch (final Exception e) {
-                fileChooser.setInitialDirectory(Paths.get(System.getProperty("user.home")).toFile());
-                fileChooser.setTitle("WOH Folder couldn't be located, please browser manually.");
+                fileChooser.setInitialDirectory(Paths.get(USERHOME).toFile());
+                fileChooser.setTitle(FOLDERNOTFOUND);
                 ito = fileChooser.showSaveDialog(this.btnLoadPic.getScene().getWindow());
             }
             if (!Objects.isNull(ito)) {
                 final boolean success = this.saveIto(ito);
                 final Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
-                alert.setTitle("WOHMaker");
+                alert.setTitle(APPNAME);
                 alert.setHeaderText(success ? "Event saved" : "Error");
                 alert.setContentText(success ? "Event was stored sucessfully to " + ito.getAbsolutePath()
                         : "Couldn't save event. ");
@@ -833,8 +865,8 @@ public class Controller implements Initializable {
                 fileChooser.setTitle("Select custom event file");
                 ito = fileChooser.showOpenDialog(this.btnLoadPic.getScene().getWindow());
             } catch (final Exception e) {
-                fileChooser.setInitialDirectory(Paths.get(System.getProperty("user.home")).toFile());
-                fileChooser.setTitle("WOH Folder couldn't be located, please browser manually.");
+                fileChooser.setInitialDirectory(Paths.get(USERHOME).toFile());
+                fileChooser.setTitle(FOLDERNOTFOUND);
                 ito = fileChooser.showSaveDialog(this.btnLoadPic.getScene().getWindow());
             }
 
@@ -850,7 +882,7 @@ public class Controller implements Initializable {
      */
 
     void createPrefs() {
-        this.prefs = Paths.get(System.getProperty("user.home"), "WOHMaker", "prefs.dat").toFile();
+        this.prefs = Paths.get(USERHOME, APPNAME, "prefs.dat").toFile();
         try (final BufferedWriter writer = new BufferedWriter(new FileWriter(this.prefs))) {
             writer.write("enableHelp=true" + System.lineSeparator() +
                     "forceRefresh=false" + System.lineSeparator() +
@@ -939,7 +971,8 @@ public class Controller implements Initializable {
         suggestionProvider = (SuggestionProvider) target.getUserData();
         suggestionProvider.clearSuggestions();
         suggestionProvider.addPossibleSuggestions(type.equals("items") ? this.itemList
-                : type.equals("spells") ? this.spellList : type.equals("itempool") ? this.itemPools : new ArrayList());
+                : type.equals("spells") ? this.spellList
+                        : type.equals("itempool") ? this.itemPools : new ArrayList<>());
         new AutoCompletionTextFieldBinding(target, suggestionProvider);
 
     }
@@ -993,6 +1026,10 @@ public class Controller implements Initializable {
 
     private static final String OPTIONSINFO = "Use # for line breaks.";
 
+    private static final String FOLDERNOTFOUND = "WOH Folder couldn't be located, please browser manually.";
+
+    private static final String OUTCOMETEXT = "Text layout is roughly the same as in woh. \nLine breaks will be respected.";
+
     /**
      * Listens to mouse hover to fill the help panel.
      */
@@ -1008,16 +1045,21 @@ public class Controller implements Initializable {
             .addListener(
                     inv -> this.helpAreatxt.setText("Shown only in the mod menu. \nSmall! around 25 chars maximum."));
         this.textFlav.hoverProperty()
-            .addListener(inv -> this.helpAreatxt.setText("Around 350 chars max. \nLine breaks will be respected."));
+            .addListener(inv -> this.helpAreatxt
+                .setText(
+                        "Positioning'll be roughly the same as in woh. \nLine breaks will be respected."));
         this.txtAuthor.hoverProperty()
             .addListener(
                     inv -> this.helpAreatxt.setText("Shown in the lower-left part of the event screen, and mod menu."));
         this.txtContact.hoverProperty()
             .addListener(inv -> this.helpAreatxt
                 .setText("Not shown in-game. A way for old god panstasz to contact you shall it be necessary."));
-        this.txtSuccessA.hoverProperty().addListener(inv -> this.helpAreatxt.setText("Outcome text."));
-        this.txtSuccessB.hoverProperty().addListener(inv -> this.helpAreatxt.setText("Outcome text."));
-        this.txtSuccessC.hoverProperty().addListener(inv -> this.helpAreatxt.setText("Outcome text."));
+        this.txtSuccessA.hoverProperty().addListener(inv -> this.helpAreatxt.setText(OUTCOMETEXT));
+        this.txtSuccessB.hoverProperty().addListener(inv -> this.helpAreatxt.setText(OUTCOMETEXT));
+        this.txtSuccessC.hoverProperty().addListener(inv -> this.helpAreatxt.setText(OUTCOMETEXT));
+        this.txtFailureA.hoverProperty().addListener(inv -> this.helpAreatxt.setText(OUTCOMETEXT));
+        this.txtFailureB.hoverProperty().addListener(inv -> this.helpAreatxt.setText(OUTCOMETEXT));
+        this.txtFailureC.hoverProperty().addListener(inv -> this.helpAreatxt.setText(OUTCOMETEXT));
         this.imgArt.hoverProperty()
             .addListener(inv -> this.helpAreatxt.setText("Click on the pic to show at higher scale."));
         this.txtPic.hoverProperty()
@@ -1029,12 +1071,6 @@ public class Controller implements Initializable {
                 .setText("Resets the pic. Default pic will display the location art instead."));
         this.linkDiscord.hoverProperty()
             .addListener(inv -> this.helpAreatxt.setText("WOH community awaits virgin blood..."));
-        this.txtFailureA.hoverProperty()
-            .addListener(inv -> this.helpAreatxt.setText("Text shown if failing the check for option A."));
-        this.txtFailureB.hoverProperty()
-            .addListener(inv -> this.helpAreatxt.setText("Text shown if failing the check for option B."));
-        this.txtFailureC.hoverProperty()
-            .addListener(inv -> this.helpAreatxt.setText("Text shown if failing the check for option C."));
         this.btnHideHelp.hoverProperty().addListener(inv -> this.helpAreatxt.setText("Hides this help window."));
         this.btnCLear.hoverProperty()
             .addListener(inv -> this.helpAreatxt.setText("Clears the content of every field."));
@@ -1052,15 +1088,9 @@ public class Controller implements Initializable {
         this.chkBigArt.hoverProperty()
             .addListener(inv -> this.helpAreatxt
                 .setText("Big arts take the whole event screen. Will be selected automatically when loading a pic."));
-        this.txtOptionA.hoverProperty()
-            .addListener(inv -> this.helpAreatxt
-                .setText(OPTIONSINFO));
-        this.txtOptionB.hoverProperty()
-            .addListener(inv -> this.helpAreatxt
-                .setText(OPTIONSINFO));
-        this.txtOptionC.hoverProperty()
-            .addListener(inv -> this.helpAreatxt
-                .setText(OPTIONSINFO));
+        this.txtOptionA.hoverProperty().addListener(inv -> this.helpAreatxt.setText(OPTIONSINFO));
+        this.txtOptionB.hoverProperty().addListener(inv -> this.helpAreatxt.setText(OPTIONSINFO));
+        this.txtOptionC.hoverProperty().addListener(inv -> this.helpAreatxt.setText(OPTIONSINFO));
         this.btnLoadIto.hoverProperty()
             .addListener(inv -> this.helpAreatxt.setText("Loads an already created event and parses its contents."));
         this.btnSaveUser.hoverProperty()
@@ -1077,15 +1107,13 @@ public class Controller implements Initializable {
 
         this.showWarn.hoverProperty()
             .addListener(inv -> this.helpAreatxt
-                .setText("Hides the warnings... \nbut they will be back."));
+                .setText("Dismisses the warnings... \nbut they will be back."));
 
-        this.lblWarnings.forEach(lbl -> {
-            lbl.visibleProperty().addListener((ob, old, newValue) -> {
-                if (newValue) {
-                    this.showWarn.setVisible(true);
-                }
-            });
-        });
+        this.lblWarnings.forEach(lbl -> lbl.visibleProperty().addListener((ob, old, newValue) -> {
+            if (newValue) {
+                this.showWarn.setImage(new Image("/warnings.png"));
+            }
+        }));
 
         this.txtExtraRewards
             .forEach(txt -> txt.hoverProperty().addListener(inv -> this.helpAreatxt.setText(EXTRAREWARDSINFO)));
@@ -1108,14 +1136,14 @@ public class Controller implements Initializable {
 
     public void loadData() throws IOException {
 
-        final File wohMaker = Paths.get(System.getProperty("user.home"), "WOHMaker").toFile();
+        final File wohMaker = Paths.get(USERHOME, APPNAME).toFile();
         if (!wohMaker.exists()) {
             wohMaker.mkdir();
         }
 
         // reads author data, or generates one
 
-        final File author = Paths.get(System.getProperty("user.home"), "WOHMaker", "author.txt").toFile();
+        final File author = Paths.get(USERHOME, APPNAME, "author.txt").toFile();
         if (!author.exists() || this.forceFileRefresh) {
             try (final BufferedWriter writer = new BufferedWriter(new FileWriter(author))) {
                 writer.write(System.getProperty("user.name") + System.lineSeparator() + "@"
@@ -1130,7 +1158,7 @@ public class Controller implements Initializable {
         // reads valid locations from disk. If no file is present, generates one with currently known
         // strings.
 
-        final File locations = Paths.get(System.getProperty("user.home"), "WOHMaker", "locations.txt").toFile();
+        final File locations = Paths.get(USERHOME, APPNAME, "locations.txt").toFile();
         if (!locations.exists() || this.forceFileRefresh) {
             try (final BufferedWriter writer = new BufferedWriter(new FileWriter(locations))) {
                 for (final String s : this.locationsList) {
@@ -1148,7 +1176,7 @@ public class Controller implements Initializable {
 
         // reads valid stat checks from disk. If no file is present, generates one with currently known
         // strings.
-        final File statchecks = Paths.get(System.getProperty("user.home"), "WOHMaker", "statchecks.txt").toFile();
+        final File statchecks = Paths.get(USERHOME, APPNAME, "statchecks.txt").toFile();
         if (!statchecks.exists() || this.forceFileRefresh) {
             try (final BufferedWriter writer = new BufferedWriter(new FileWriter(statchecks))) {
                 for (final String s : this.checksList) {
@@ -1169,7 +1197,7 @@ public class Controller implements Initializable {
         this.comboCheckC.getSelectionModel().select(0);
 
         // reads valid rewards from disk. If no file is present, generates one with currently known strings.
-        final File rewards = Paths.get(System.getProperty("user.home"), "WOHMaker", "rewards.txt").toFile();
+        final File rewards = Paths.get(USERHOME, APPNAME, "rewards.txt").toFile();
         if (!rewards.exists() || this.forceFileRefresh) {
             try (final BufferedWriter writer = new BufferedWriter(new FileWriter(rewards))) {
                 for (final String s : this.rewardsList) {
@@ -1184,7 +1212,7 @@ public class Controller implements Initializable {
 
         // reads spells data, or generates one
 
-        final File spells = Paths.get(System.getProperty("user.home"), "WOHMaker", "spells.txt").toFile();
+        final File spells = Paths.get(USERHOME, APPNAME, "spells.txt").toFile();
         if (!spells.exists() || this.forceFileRefresh) {
             try (final BufferedWriter writer = new BufferedWriter(new FileWriter(spells))) {
                 for (final String s : this.spellList) {
@@ -1202,7 +1230,7 @@ public class Controller implements Initializable {
 
         // reads valid itemlist from disk. If no file is present, generates one with currently known
         // strings.
-        final File items = Paths.get(System.getProperty("user.home"), "WOHMaker", "itemlist.txt").toFile();
+        final File items = Paths.get(USERHOME, APPNAME, "itemlist.txt").toFile();
         if (!items.exists() || this.forceFileRefresh) {
             try (final BufferedWriter writer = new BufferedWriter(new FileWriter(items))) {
                 for (final String s : this.itemList) {
@@ -1217,7 +1245,7 @@ public class Controller implements Initializable {
 
         // reads valid extra rewards from disk. If no file is present, generates one with currently known
         // strings.
-        final File extraRewards = Paths.get(System.getProperty("user.home"), "WOHMaker", "extrarewards.txt").toFile();
+        final File extraRewards = Paths.get(USERHOME, APPNAME, "extrarewards.txt").toFile();
         if (!extraRewards.exists() || this.forceFileRefresh) {
             try (final BufferedWriter writer = new BufferedWriter(new FileWriter(extraRewards))) {
                 for (final String s : this.extraRewardsList) {
@@ -1237,7 +1265,7 @@ public class Controller implements Initializable {
 
         // reads valid visual effects from disk. If no file is present, generates one with currently known
         // strings.
-        final File visualEffects = Paths.get(System.getProperty("user.home"), "WOHMaker", "visualeffects.txt").toFile();
+        final File visualEffects = Paths.get(USERHOME, APPNAME, "visualeffects.txt").toFile();
         if (!visualEffects.exists() || this.forceFileRefresh) {
             try (final BufferedWriter writer = new BufferedWriter(new FileWriter(visualEffects))) {
                 for (final String s : this.visualEffectsList) {
@@ -1261,9 +1289,26 @@ public class Controller implements Initializable {
         this.readPrefs();
     }
 
+    /**
+     * Implementation for "Open with WOHMaker" and dragging the .ito over the exe. If scene hasn't ben
+     * created yet, wait for it.
+     */
+
     void loadIto(final File ito) {
 
-        this.clearCOntrols(this.cmbOptions.getScene().getRoot());
+        if (this.cmbOptions.getScene() == null) {
+            this.cmbOptions.sceneProperty().addListener(inv -> {
+                this.clearCOntrols(this.cmbOptions.getScene().getRoot());
+                this.actuallyLoadIto(ito);
+            });
+
+        } else {
+            this.clearCOntrols(this.cmbOptions.getScene().getRoot());
+            this.actuallyLoadIto(ito);
+        }
+    }
+
+    void actuallyLoadIto(final File ito) {
 
         try {
             final List<String> strings = Files.readAllLines(ito.toPath());
@@ -1305,19 +1350,19 @@ public class Controller implements Initializable {
                         }
                         if (s.startsWith("testa")) {
                             this.comboCheckA.getSelectionModel().select(substring);
-                            if (substring.equals("story")) {
+                            if (substring.equals(STORY)) {
                                 this.tabSuccessA.getTabPane().getSelectionModel().select(0);
                             }
                         }
                         if (s.startsWith("testb")) {
                             this.comboCheckB.getSelectionModel().select(substring);
-                            if (substring.equals("story")) {
+                            if (substring.equals(STORY)) {
                                 this.tabSuccessB.getTabPane().getSelectionModel().select(0);
                             }
                         }
                         if (s.startsWith("testc")) {
                             this.comboCheckC.getSelectionModel().select(substring);
-                            if (substring.equals("story")) {
+                            if (substring.equals(STORY)) {
                                 this.tabSuccessC.getTabPane().getSelectionModel().select(0);
                             }
                         }
@@ -1527,6 +1572,7 @@ public class Controller implements Initializable {
         } catch (final IOException e) {
             e.printStackTrace();
         }
+
     }
 
     boolean saveIto(final File ito) {
@@ -1717,7 +1763,7 @@ public class Controller implements Initializable {
                                         + "\"" + System.lineSeparator() : "")
                                 + System.lineSeparator() + System.lineSeparator() +
 
-                                "--Made with WOHMaker " + VERSION + " --=" + System.lineSeparator());
+                                "--Made with " + APPNAME + " " + VERSION + " --=" + System.lineSeparator());
             }
 
             return true;

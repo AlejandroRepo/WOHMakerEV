@@ -6,5 +6,4 @@ module EventMaker {
     requires org.controlsfx.controls;
 
     opens eventmaker;
-    exports eventmaker;
 }

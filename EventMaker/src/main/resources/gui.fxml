@@ -132,9 +132,9 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </ImageView>
-                              <ImageView fx:id="showWarn" fitHeight="20.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" smooth="false" styleClass="floatingBtn" translateX="3.0" visible="false">
+                              <ImageView fx:id="showWarn" fitHeight="20.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" smooth="false" styleClass="floatingBtn" translateX="3.0">
                                  <image>
-                                    <Image url="@warnings.png" />
+                                    <Image url="@warningsb.png" />
                                  </image>
                               </ImageView>
                            </children>
@@ -173,6 +173,9 @@
                                        <font>
                                           <Font name="System Italic" size="16.0" />
                                        </font>
+                                       <opaqueInsets>
+                                          <Insets left="300.0" right="300.0" />
+                                       </opaqueInsets>
                                     </TextArea>
                                     <Label fx:id="lblTooLong" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="19.0" prefWidth="628.0" text="Probably too long!" textFill="#ff40ff" visible="false">
                                        <font>
@@ -369,7 +372,7 @@
             <Insets top="5.0" />
          </VBox.margin>
          <content>
-            <HBox fx:id="optionsBar" alignment="CENTER" prefHeight="408.0" prefWidth="1237.0" style="-fx-spacing: 8px; -fx-background-color: black;">
+            <HBox fx:id="optionsBar" alignment="CENTER" prefHeight="421.0" prefWidth="1237.0" style="-fx-spacing: 8px; -fx-background-color: black;">
                <children>
                   <VBox fx:id="optionA" alignment="CENTER" prefHeight="406.0" prefWidth="407.0" style="-fx-background-color: black;" HBox.hgrow="SOMETIMES">
                      <children>
@@ -449,7 +452,7 @@
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                    </rowConstraints>
                                                    <children>
-                                                      <TextField fx:id="txtRewardA" alignment="BOTTOM_CENTER" disable="true" prefHeight="25.0" prefWidth="155.0" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                                                      <TextField fx:id="txtRewardA" alignment="BOTTOM_CENTER" disable="true" prefWidth="155.0" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                                                          <GridPane.margin>
                                                             <Insets />
                                                          </GridPane.margin>
@@ -540,7 +543,7 @@
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                    </rowConstraints>
                                                    <children>
-                                                      <TextField fx:id="txtRewardAF" alignment="CENTER" disable="true" prefHeight="53.0" prefWidth="140.0" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                                                      <TextField fx:id="txtRewardAF" alignment="CENTER" disable="true" prefWidth="140.0" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                                                          <GridPane.margin>
                                                             <Insets />
                                                          </GridPane.margin>
@@ -674,7 +677,7 @@
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                    </rowConstraints>
                                                    <children>
-                                                      <TextField fx:id="txtRewardB" alignment="CENTER" disable="true" prefHeight="25.0" prefWidth="155.0" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                                                      <TextField fx:id="txtRewardB" alignment="CENTER" disable="true" prefWidth="155.0" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                                                          <font>
                                                             <Font name="System Bold" size="12.0" />
                                                          </font>
@@ -746,7 +749,7 @@
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                    </rowConstraints>
                                                    <children>
-                                                      <TextField fx:id="txtRewardBF" alignment="CENTER" disable="true" prefHeight="25.0" prefWidth="155.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                                                      <TextField fx:id="txtRewardBF" alignment="CENTER" disable="true" prefWidth="155.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
                                                       <Label prefHeight="20.0" prefWidth="101.0" text="Reward" textFill="WHITE" GridPane.hgrow="SOMETIMES">
                                                          <font>
                                                             <Font size="16.0" />
@@ -863,7 +866,7 @@
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                    </rowConstraints>
                                                    <children>
-                                                      <TextField fx:id="txtRewardC" alignment="CENTER" disable="true" prefHeight="25.0" prefWidth="155.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                                                      <TextField fx:id="txtRewardC" alignment="CENTER" disable="true" prefWidth="155.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
                                                       <Label prefHeight="20.0" prefWidth="101.0" styleClass="smaller" text="Reward" textFill="WHITE" GridPane.hgrow="SOMETIMES">
                                                          <font>
                                                             <Font size="16.0" />
@@ -931,7 +934,7 @@
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                    </rowConstraints>
                                                    <children>
-                                                      <TextField fx:id="txtRewardCF" alignment="CENTER" disable="true" prefHeight="25.0" prefWidth="155.0" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                                                      <TextField fx:id="txtRewardCF" alignment="CENTER" disable="true" prefWidth="155.0" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                                                          <font>
                                                             <Font name="System Bold" size="12.0" />
                                                          </font></TextField>
