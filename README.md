@@ -2,9 +2,16 @@
 
 World of Horror custom event creation tool.
 
-Download link:  <b>[Download WOHMaker 1.3b](WOHMaker1.3b.zip?raw=true)</b> [06/06/2020]
+Download link:  <b>[Download WOHMaker 1.4](WOHMaker1.4.zip?raw=true)</b> [07/06/2020]
 
 ![wohmakert](wohmaker.png)
+
+**Version 1.4:**
+- You can now drag ito files over the exe to load them.
+- You can now set ito files to "open with -> WOHMaker" 
+- Text for intro and outcomes now looks as it will look in the game.
+- Improved demeanor of "hide warnings" button.
+- Optimized code and dependencies.
 
 **Version 1.3b:**
 - Now features a proper windows executable
@@ -53,7 +60,6 @@ TO DO:
     Make UI rezisable and adjust better to different resolutions.
     Make it so sta/rea/doom/funds rewards take only integers as value.
     Implement new features as they are being provided by the game.
-    Provide a proper windows executable.
     Provide launcher for linux/macOS.
 
 Technical:
