@@ -13,6 +13,8 @@ Download link:  <b>[Download WOHMaker 1.4](WOHMaker1.4.zip?raw=true)</b> [07/06/
 - Improved demeanor of "hide warnings" button.
 - Optimized code and dependencies.
 
+![wohmakert](wohmakerb.png)
+
 **Version 1.3b:**
 - Now features a proper windows executable
 - Removed white band
