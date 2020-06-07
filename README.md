@@ -60,7 +60,6 @@ TO DO:
     Make UI rezisable and adjust better to different resolutions.
     Make it so sta/rea/doom/funds rewards take only integers as value.
     Implement new features as they are being provided by the game.
-    Provide a proper windows executable.
     Provide launcher for linux/macOS.
 
 Technical:
