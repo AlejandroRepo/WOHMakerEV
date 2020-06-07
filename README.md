@@ -2,7 +2,7 @@
 
 World of Horror custom event creation tool.
 
-Download link:  <b>[Download WOHMaker 1.3b](WOHMaker1.4.zip?raw=true)</b> [06/06/2020]
+Download link:  <b>[Download WOHMaker 1.4](WOHMaker1.4.zip?raw=true)</b> [07/06/2020]
 
 ![wohmakert](wohmaker.png)
 
