@@ -5,6 +5,7 @@ World of Horror custom event creation tool.
 Download links: 
 
 Windows: <b>[Download WOHMaker 1.4 for Windows](WOHMaker1.4.zip?raw=true)</b> [07/06/2020]
+
 MacOS test build: <b>[Download WOHMaker 1.4 for macOS](WOHMaker1.4%20macOS%20bundled%20JRE.zip?raw=true)</b> [07/06/2020]
 
 ![wohmakert](wohmaker.png)
