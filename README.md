@@ -4,11 +4,17 @@ World of Horror custom event creation tool.
 
 Download links: 
 
-Windows: <b>[Download WOHMaker 1.4 for Windows](WOHMaker1.4.zip?raw=true)</b> [07/06/2020]
+Windows: <b>[Download WOHMaker 1.4b for Windows](WOHMaker1.4b.zip?raw=true)</b> [07/06/2020]
 
 MacOS test build: <b>[Download WOHMaker 1.4 for macOS](WOHMaker1.4%20macOS%20bundled%20JRE.zip?raw=true)</b> [07/06/2020]
 
 ![wohmakert](wohmaker.png)
+
+**Version 1.4b:**
+- Added option to save the event image to a sepparate user folder.
+- Saved events won't cause crashes in macOS when leaving empty fields.
+- Improved parsing of ito files (i.e : loading an event with an injury will now display the "random" string, "´" char now supported)
+- Other small fixes and tweaks.
 
 **Version 1.4:**
 - You can now drag ito files over the exe to load them.
