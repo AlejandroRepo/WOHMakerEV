@@ -1,11 +1,12 @@
-.text-area {
-  -fx-font-family: Silver;
-  -fx-font-size: 22;
-}
-
 .helpArea .scroll-bar{
   -fx-opacity: 0;
   -fx-max-width: 0px;
+}
+
+.text-area {
+  -fx-font-family: Silver;
+  -fx-text-fill: white;
+  -fx-font-size: 22;
 }
 
 .floatingBtn:hover{
@@ -18,12 +19,40 @@
   -fx-scale-y: 0.95;
 }
 
+.combo-box .list-cell:selected{
+  -fx-background-color: white;
+  -fx-text-fill: black;
+   -fx-font-weight: bold;
+}
+
+.combo-box .list-cell:hover{
+   -fx-text-fill: white;
+  -fx-background-color: black;
+  -fx-font-weight: bold;
+}
+
+.optionsNumber {
+  -fx-background-color: black;
+  -fx-border-color: white;
+  -fx-border-width: 2px;
+}
+
+.optionsNumber .list-cell:selected{
+   -fx-text-fill: white;
+   -fx-background-color: black;
+   -fx-font-weight: bold;
+}
+
+.optionsNumber .list-cell:hover{
+  -fx-background-color: black;
+  -fx-font-weight: bold;
+}
+
 .helpArea .content{
   -fx-background-color: black;
   -fx-border-width: 2px;
   -fx-border-color: white;
 }
-
 
 .helpArea.content :selected{
   -fx-border-color: white;
@@ -41,12 +70,13 @@
   -fx-border-width: 2px;
   -fx-border-color: white;
   -fx-background-color: black;
-    -fx-padding: 0 130 0 130;
+  -fx-padding: 0 130 0 130;
 }
 
 .flavor *.text {
     -fx-text-alignment: center;
-
+    -fx-font-style: oblique;
+    -fx-font-smoothing-type: lcd;
 }
 
 .optionText {
@@ -64,9 +94,9 @@
 
 .optionText *.text {
     -fx-text-alignment: center;
+    -fx-font-style: oblique;
+    -fx-font-smoothing-type: lcd;
 }
-
-
 
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track{

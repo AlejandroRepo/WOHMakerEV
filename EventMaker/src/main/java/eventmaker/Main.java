@@ -15,7 +15,6 @@ public class Main extends Application {
     @Override
     public void start(final Stage primaryStage) throws Exception {
 
-
         final Parent root = FXMLLoader.load(this.getClass().getResource("/gui.fxml"));
         primaryStage.setTitle("WOH Maker");
         root.autosize();
