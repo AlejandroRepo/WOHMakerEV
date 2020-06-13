@@ -4,11 +4,17 @@ World of Horror custom event creation tool.
 
 Download links: 
 
-Windows: <b>[Download WOHMaker 1.4b for Windows](WOHMaker1.4b.zip?raw=true)</b> [08/06/2020]
+Windows: <b>[Download WOHMaker 1.5 for Windows](WOHMaker1.5.zip?raw=true)</b> [08/06/2020]
 
 MacOS test build: <b>[Download WOHMaker 1.4 for macOS](WOHMaker1.4%20macOS%20bundled%20JRE.zip?raw=true)</b> [07/06/2020]
 
 ![wohmakert](wohmaker.png)
+
+**Version 1.5**
+- Added icons for each location.
+- Rewards which take integer values will not accept text, and will default to 0.
+- Improved behaviour of reward/extra-reward controls.
+- Improved layout and fixed some UI issues here and there.
 
 **Version 1.4b:**
 - Added option to save the event image to a sepparate user folder.
