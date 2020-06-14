@@ -613,6 +613,7 @@ public class Controller implements Initializable {
             if (txtField.getText().equals("random")) {
                 txtField.setText(" ");
             }
+            this.refreshAutocompletion(txtField, "none");
 
             if (selectedItem.equals("item")) {
                 txtField.clear();
@@ -1033,18 +1034,25 @@ public class Controller implements Initializable {
      */
 
     void refreshAutocompletion(final TextField target, final String type) {
+
         SuggestionProvider suggestionProvider = null;
 
         if (target.getUserData() == null) {
             suggestionProvider = SuggestionProvider.create(new ArrayList<>());
-            target.setUserData(suggestionProvider);
+        } else {
+            suggestionProvider = (SuggestionProvider) ((Pair) target.getUserData()).getValue();
         }
-        suggestionProvider = (SuggestionProvider) target.getUserData();
         suggestionProvider.clearSuggestions();
         suggestionProvider.addPossibleSuggestions(type.equals("items") ? this.itemList
                 : type.equals("spells") ? this.spellList
                         : type.equals("itempool") ? this.itemPools : new ArrayList<>());
-        new AutoCompletionTextFieldBinding(target, suggestionProvider);
+        if (target.getUserData() != null) {
+            ((AutoCompletionTextFieldBinding) ((Pair) target.getUserData()).getKey()).dispose();
+        }
+
+        final Pair<AutoCompletionTextFieldBinding, SuggestionProvider> autoCompletion = new Pair(
+                new AutoCompletionTextFieldBinding(target, suggestionProvider), suggestionProvider);
+        target.setUserData(autoCompletion);
 
     }
 
