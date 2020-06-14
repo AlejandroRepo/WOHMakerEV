@@ -100,7 +100,7 @@ public class Controller implements Initializable {
 
     List<String> visualEffectsList = Arrays.asList("none", "whiteflash", "bloodsplat");
 
-    public static final String VERSION = "1.5";
+    public static final String VERSION = "1.5b";
 
     public static final String APPNAME = "WOHMaker";
 
@@ -778,6 +778,20 @@ public class Controller implements Initializable {
 
         this.btnRandomChars.setOnMouseClicked(evt -> this.refreshChars());
 
+        this.checkUserFolder.setOnAction(evt -> {
+            if (this.checkUserFolder.isSelected()
+                    && (this.txtPic.getText().contains("/") || this.txtPic.getText().contains("\\"))) {
+                final Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle(APPNAME);
+                alert.setHeaderText("Are you sure...?");
+                alert.setContentText("The image route '" + this.txtPic.getText() + "' already includes a folder!\n\n"
+                        + "This will add yet another folder with your username and will probably "
+                        + "lead to unwanted results.\n\n Please Make sure this is what you want.");
+                alert.getButtonTypes().setAll(ButtonType.OK);
+                alert.showAndWait();
+            }
+        });
+
         this.btnLoadPic.setOnAction(evt -> {
 
             FileChooser fileChooser = null;
@@ -1446,13 +1460,13 @@ public class Controller implements Initializable {
                             this.sldWavy.setValue(Double.parseDouble(substring.replace(',', '.')));
                         }
                         if (s.startsWith("optiona")) {
-                            this.txtOptionA.setText(substring.replace("#", " "));
+                            this.txtOptionA.setText(substring);
                         }
                         if (s.startsWith("optionb")) {
-                            this.txtOptionB.setText(substring.replace("#", " "));
+                            this.txtOptionB.setText(substring);
                         }
                         if (s.startsWith("optionc")) {
-                            this.txtOptionC.setText(substring.replace("#", " "));
+                            this.txtOptionC.setText(substring);
                         }
                         if (s.startsWith("testa")) {
                             this.comboCheckA.getSelectionModel().select(substring);
@@ -1669,9 +1683,13 @@ public class Controller implements Initializable {
                                 .replace(".ito", "")
                                 .concat(File.separator)
                                 .concat(substring)));
+
                             this.txtPic.setText(substring);
                             this.eventArt = this.imgArt.getImage();
                             this.doImageCalculations();
+                            if (this.txtPic.getText().contains("\\") || this.txtPic.getText().contains("/")) {
+                                this.checkUserFolder.setSelected(false);
+                            }
                         }
                     }
 
@@ -1699,7 +1717,7 @@ public class Controller implements Initializable {
             try (final BufferedWriter bufferedWriter = Files.newBufferedWriter(ito.toPath(),
                     Charset.defaultCharset())) {
 
-                if (!this.txtPic.getText().isEmpty()
+                if ((!this.txtPic.getText().isEmpty() && !this.txtPic.getText().isBlank())
                         && Paths.get(ito.getParentFile().toPath().toString(), this.checkUserFolder.isSelected()
                                 ? this.txtAuthor.getText() + File.separator + this.txtPic.getText()
                                 : this.txtPic.getText())
@@ -1714,10 +1732,10 @@ public class Controller implements Initializable {
                                 .toFile());
                 }
 
-
                 final int numOptions = Integer.parseInt(this.cmbOptions.getSelectionModel().getSelectedItem());
 
                 bufferedWriter.write("[event]" + System.lineSeparator());
+
                 bufferedWriter.write(
                         "name=\"" + (this.textTitle.getText().isEmpty() ? " " : this.textTitle.getText()) + "\""
                                 + System.lineSeparator() +
@@ -1763,8 +1781,7 @@ public class Controller implements Initializable {
                                 + (this.txtSuccessA.getText().isEmpty() ? " "
                                         : this.txtSuccessA.getText().replace("\n", "#"))
                                 + "\""
-                                + System.lineSeparator()
-                                +
+                                + System.lineSeparator() +
                                 "winprizea=\""
                                 + (this.cmbRewardsA.getSelectionModel().getSelectedItem().equals("none") ? " "
                                         : this.cmbRewardsA.getSelectionModel().getSelectedItem())
@@ -1782,34 +1799,41 @@ public class Controller implements Initializable {
                                 "wineffecta=\""
                                 + (this.cmbVisualA.getSelectionModel().getSelectedItem().equals("none") ? " "
                                         : this.cmbVisualA.getSelectionModel().getSelectedItem())
-                                + "\"" + System.lineSeparator() + System
-                                    .lineSeparator()
-                                +
-                                "failurea=\""
-                                + (this.txtFailureA.getText().isEmpty() ? " "
-                                        : this.txtFailureA.getText().replace("\n", "#"))
-                                + "\""
-                                + System.lineSeparator()
-                                +
-                                "failprizea=\""
-                                + (this.cmbRewardsAF.getSelectionModel().getSelectedItem().equals("none") ? " "
-                                        : this.cmbRewardsAF.getSelectionModel().getSelectedItem())
-                                + "\"" + System.lineSeparator() +
-                                "failnumbera=\"" + this.txtRewardAF.getText() + "\"" + System.lineSeparator() +
-                                "extra_failprizea=\""
-                                + (this.cmbExtraRewardsAF.getSelectionModel().getSelectedItem().equals("none") ? " "
-                                        : this.cmbExtraRewardsAF.getSelectionModel().getSelectedItem())
-                                + "\"" + System
-                                    .lineSeparator()
-                                +
-                                "extra_failnumbera=\""
-                                + (this.txtExtraRewardAF.getText().isEmpty() ? " " : this.txtExtraRewardAF.getText())
                                 + "\"" + System.lineSeparator()
-                                +
-                                "faileffecta=\""
-                                + (this.cmbVisualAF.getSelectionModel().getSelectedItem().equals("none") ? " "
-                                        : this.cmbVisualAF.getSelectionModel().getSelectedItem())
-                                + "\"" + System.lineSeparator()
+                                + (this.comboCheckA.getSelectionModel().getSelectedItem().equals(STORY) ? " "
+                                        : "failurea=\""
+                                                + (this.txtFailureA.getText().isEmpty() ? " "
+                                                        : this.txtFailureA.getText().replace("\n", "#"))
+                                                + "\""
+                                                + System.lineSeparator() +
+                                                "failprizea=\""
+                                                + (this.cmbRewardsAF.getSelectionModel()
+                                                    .getSelectedItem()
+                                                    .equals("none") ? " "
+                                                            : this.cmbRewardsAF.getSelectionModel().getSelectedItem())
+                                                + "\"" + System.lineSeparator() +
+                                                "failnumbera=\"" + this.txtRewardAF.getText() + "\""
+                                                + System.lineSeparator() +
+                                                "extra_failprizea=\""
+                                                + (this.cmbExtraRewardsAF.getSelectionModel()
+                                                    .getSelectedItem()
+                                                    .equals("none")
+                                                            ? " "
+                                                            : this.cmbExtraRewardsAF.getSelectionModel()
+                                                                .getSelectedItem())
+                                                + "\"" + System
+                                                    .lineSeparator()
+                                                +
+                                                "extra_failnumbera=\""
+                                                + (this.txtExtraRewardAF.getText().isEmpty() ? " "
+                                                        : this.txtExtraRewardAF.getText())
+                                                + "\"" + System.lineSeparator()
+                                                +
+                                                "faileffecta=\""
+                                                + (this.cmbVisualAF.getSelectionModel().getSelectedItem().equals("none")
+                                                        ? " "
+                                                        : this.cmbVisualAF.getSelectionModel().getSelectedItem())
+                                                + "\"" + System.lineSeparator())
                                 + System.lineSeparator() + System.lineSeparator() +
 
                                 (numOptions > 1 ? "optionb=\""
@@ -1840,42 +1864,52 @@ public class Controller implements Initializable {
                                         + (this.txtExtraRewardB.getText().isEmpty() ? " "
                                                 : this.txtExtraRewardB.getText())
                                         + "\""
-                                        + System.lineSeparator() +
-                                        "wineffectb=\""
+                                        + System.lineSeparator()
+                                        + "wineffectb=\""
                                         + (this.cmbVisualB.getSelectionModel().getSelectedItem().equals("none") ? " "
                                                 : this.cmbVisualB.getSelectionModel().getSelectedItem())
-                                        + "\"" + System.lineSeparator() + System
-                                            .lineSeparator()
-                                        +
-                                        "failureb=\""
-                                        + (this.txtFailureB.getText().isEmpty() ? " "
-                                                : this.txtFailureB.getText().replace("\n", "#"))
-                                        + "\""
-                                        + System.lineSeparator() +
-                                        "failprizeb=\""
-                                        + (this.cmbRewardsBF.getSelectionModel().getSelectedItem().equals("none") ? " "
-                                                : this.cmbRewardsBF.getSelectionModel().getSelectedItem())
-                                        + "\"" + System.lineSeparator() +
-                                        "failnumberb=\"" + this.txtRewardBF.getText() + "\"" + System.lineSeparator() +
-                                        "extra_failprizeb=\""
-                                        + (this.cmbExtraRewardsBF.getSelectionModel().getSelectedItem().equals("none")
-                                                ? " "
-                                                : this.cmbExtraRewardsBF.getSelectionModel().getSelectedItem())
-                                        + "\"" + System
-                                            .lineSeparator()
-                                        +
-                                        "extra_failnumberb=\""
-                                        + (this.txtExtraRewardBF.getText().isEmpty() ? " "
-                                                : this.txtExtraRewardBF.getText())
-                                        + "\""
-                                        + System.lineSeparator() +
-                                        "faileffectb=\""
-                                        + (this.cmbVisualBF.getSelectionModel().getSelectedItem().equals("none") ? " "
-                                                : this.cmbVisualBF.getSelectionModel().getSelectedItem())
-                                        + "\"" + System.lineSeparator() : "")
+                                        + "\"" + System.lineSeparator() + System.lineSeparator()
+                                        + (this.comboCheckB.getSelectionModel().getSelectedItem().equals(STORY) ? ""
+                                                : "failureb=\""
+                                                        + (this.txtFailureB.getText().isEmpty() ? " "
+                                                                : this.txtFailureB.getText().replace("\n", "#"))
+                                                        + "\""
+                                                        + System.lineSeparator() +
+                                                        "failprizeb=\""
+                                                        + (this.cmbRewardsBF.getSelectionModel()
+                                                            .getSelectedItem()
+                                                            .equals("none") ? " "
+                                                                    : this.cmbRewardsBF.getSelectionModel()
+                                                                        .getSelectedItem())
+                                                        + "\"" + System.lineSeparator() +
+                                                        "failnumberb=\"" + this.txtRewardBF.getText() + "\""
+                                                        + System.lineSeparator() +
+                                                        "extra_failprizeb=\""
+                                                        + (this.cmbExtraRewardsBF.getSelectionModel()
+                                                            .getSelectedItem()
+                                                            .equals("none")
+                                                                    ? " "
+                                                                    : this.cmbExtraRewardsBF.getSelectionModel()
+                                                                        .getSelectedItem())
+                                                        + "\"" + System
+                                                            .lineSeparator()
+                                                        +
+                                                        "extra_failnumberb=\""
+                                                        + (this.txtExtraRewardBF.getText().isEmpty() ? " "
+                                                                : this.txtExtraRewardBF.getText())
+                                                        + "\""
+                                                        + System.lineSeparator() +
+                                                        "faileffectb=\""
+                                                        + (this.cmbVisualBF.getSelectionModel()
+                                                            .getSelectedItem()
+                                                            .equals("none") ? " "
+                                                                    : this.cmbVisualBF.getSelectionModel()
+                                                                        .getSelectedItem())
+                                                        + "\"" + System.lineSeparator() + System.lineSeparator())
+                                        : "")
                                 +
-
                                 (numOptions > 2 ? "optionc=\""
+
                                         + (this.txtOptionC.getText().isEmpty() ? " " : this.txtOptionC.getText()) + "\""
                                         + System.lineSeparator() +
                                         "testc=\"" + this.comboCheckC.getSelectionModel().getSelectedItem() + "\""
@@ -1907,36 +1941,46 @@ public class Controller implements Initializable {
                                         "wineffectc=\""
                                         + (this.cmbVisualC.getSelectionModel().getSelectedItem().equals("none") ? " "
                                                 : this.cmbVisualC.getSelectionModel().getSelectedItem())
-                                        + "\"" + System.lineSeparator() + System
-                                            .lineSeparator()
-                                        +
-                                        "failurec=\""
-                                        + (this.txtFailureC.getText().isEmpty() ? " "
-                                                : this.txtFailureC.getText().replace("\n", "#"))
-                                        + "\""
-                                        + System.lineSeparator() +
-                                        "failprizec=\""
-                                        + (this.cmbRewardsCF.getSelectionModel().getSelectedItem().equals("none") ? " "
-                                                : this.cmbRewardsCF.getSelectionModel().getSelectedItem())
-                                        + "\"" + System.lineSeparator() +
-                                        "failnumberc=\""
-                                        + (this.txtRewardCF.getText().isEmpty() ? " " : this.txtRewardCF.getText())
-                                        + "\"" + System.lineSeparator() +
-                                        "extra_failprizec=\""
-                                        + (this.cmbExtraRewardsCF.getSelectionModel().getSelectedItem().equals("none")
-                                                ? " "
-                                                : this.cmbExtraRewardsCF.getSelectionModel().getSelectedItem())
-                                        + "\"" + System
-                                            .lineSeparator()
-                                        +
-                                        "extra_failnumberc=\""
-                                        + (this.txtExtraRewardCF.getText().isEmpty() ? " "
-                                                : this.txtExtraRewardCF.getText())
-                                        + "\""
-                                        + System.lineSeparator() +
-                                        "faileffectc=\""
-                                        + (this.cmbVisualCF.getSelectionModel().getSelectedItem().equals("none") ? " "
-                                                : this.cmbVisualCF.getSelectionModel().getSelectedItem())
+
+                                        + (this.comboCheckC.getSelectionModel().getSelectedItem().equals(STORY) ? ""
+                                                : "\"" + System.lineSeparator() + System.lineSeparator() +
+                                                        "failurec=\""
+                                                        + (this.txtFailureC.getText().isEmpty() ? " "
+                                                                : this.txtFailureC.getText().replace("\n", "#"))
+                                                        + "\""
+                                                        + System.lineSeparator() +
+                                                        "failprizec=\""
+                                                        + (this.cmbRewardsCF.getSelectionModel()
+                                                            .getSelectedItem()
+                                                            .equals("none") ? " "
+                                                                    : this.cmbRewardsCF.getSelectionModel()
+                                                                        .getSelectedItem())
+                                                        + "\"" + System.lineSeparator() +
+                                                        "failnumberc=\""
+                                                        + (this.txtRewardCF.getText().isEmpty() ? " "
+                                                                : this.txtRewardCF.getText())
+                                                        + "\"" + System.lineSeparator() +
+                                                        "extra_failprizec=\""
+                                                        + (this.cmbExtraRewardsCF.getSelectionModel()
+                                                            .getSelectedItem()
+                                                            .equals("none")
+                                                                    ? " "
+                                                                    : this.cmbExtraRewardsCF.getSelectionModel()
+                                                                        .getSelectedItem())
+                                                        + "\"" + System
+                                                            .lineSeparator()
+                                                        +
+                                                        "extra_failnumberc=\""
+                                                        + (this.txtExtraRewardCF.getText().isEmpty() ? " "
+                                                                : this.txtExtraRewardCF.getText())
+                                                        + "\""
+                                                        + System.lineSeparator() +
+                                                        "faileffectc=\""
+                                                        + (this.cmbVisualCF.getSelectionModel()
+                                                            .getSelectedItem()
+                                                            .equals("none") ? " "
+                                                                    : this.cmbVisualCF.getSelectionModel()
+                                                                        .getSelectedItem()))
                                         + "\"" + System.lineSeparator() : " ")
                                 + System.lineSeparator() + System.lineSeparator() +
 

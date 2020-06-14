@@ -229,13 +229,16 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="23.0" prefWidth="261.0" style="-fx-background-color: black;" translateX="-10.0">
                                        <children>
-                                          <TextField fx:id="txtPic" editable="false" minWidth="100.0" prefHeight="25.0" prefWidth="132.0">
+                                          <TextField fx:id="txtPic" editable="false" minWidth="100.0" prefHeight="25.0" prefWidth="132.0" style="-fx-border-width: 0 0 1 0; -fx-text-fill: white;" styleClass="optionsNumber">
                                              <cursor>
                                                 <Cursor fx:constant="DEFAULT" />
                                              </cursor>
                                              <opaqueInsets>
                                                 <Insets />
                                              </opaqueInsets>
+                                             <font>
+                                                <Font name="System Italic" size="14.0" />
+                                             </font>
                                           </TextField>
                                           <Button fx:id="btnLoadPic" alignment="TOP_CENTER" maxHeight="10.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="102.0" style="-fx-background-color: black; -fx-text-fill: white; -fx-border-color: white; -fx-border-width: 3px;" styleClass="loadPic" text="Load">
                                              <cursor>
@@ -819,7 +822,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <ComboBox fx:id="comboCheckC" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="163.0" promptText="Story" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                              <ComboBox fx:id="comboCheckC" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="163.0" promptText="Story" styleClass="optionsNumber" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets bottom="-5.0" top="10.0" />
                                  </GridPane.margin>
