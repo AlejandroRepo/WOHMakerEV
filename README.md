@@ -6,7 +6,7 @@ Download links:
 
 Windows: <b>[Download WOHMaker 1.5b for Windows](WOHMaker1.5b.zip?raw=true)</b> [08/06/2020]
 
-MacOS test build: <b>[Download WOHMaker 1.4 for macOS](WOHMaker1.4%20macOS%20bundled%20JRE.zip?raw=true)</b> [07/06/2020]
+MacOS test build: <b>[Download WOHMaker 1.5 for macOS](WOHMaker1.5%20macOS.zip?raw=true)</b> [07/06/2020]
 
 ![wohmakert](wohmaker.png)
 
