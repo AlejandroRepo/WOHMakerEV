@@ -80,14 +80,14 @@ Known issues:
     
 TO DO:
     
-    Make UI rezisable and adjust better to different resolutions.
-    Make it so sta/rea/doom/funds rewards take only integers as value.
+    Make UI responsive.
+    Fix macOS specific issues.
+    Provide executable for linux.
     Implement new features as they are being provided by the game.
-    Provide launcher for linux/macOS.
-
+    
 Technical:
     
-    Written in Java 11, JavaFX 14.0.1. Compiled, ran and released as jLink image through javafx-maven-plugin.
+    Written in Java 11, JavaFX 14.0.1. Compiled and through javafx-maven-plugin, released as executable with jar2exe.
 
 Credits and thanks:
 
@@ -96,3 +96,4 @@ Credits and thanks:
     Thanks to: 
     Mythical, for providing asset lists and general help.
     Throdax, for coding advices and collaboration.
+    Chiavica, for helping with macOS test builds.
