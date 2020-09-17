@@ -4,11 +4,14 @@ World of Horror custom event creation tool.
 
 Download links: 
 
-Windows: <b>[Download WOHMaker 1.5b (fixed exe) for Windows](https://github.com/AlejandroRepo/WOHMakerEV/blob/master/WOHMaker1.5b%20fixed%20exe.zip?raw=true)</b> [19/07/2020]
+Windows: <b>[Download WOHMaker 1.5c (fixed exe) for Windows](https://github.com/AlejandroRepo/WOHMakerEV/blob/master/WOHMaker1.5c%20fixed%20exe.zip?raw=true)</b> [19/07/2020]
 
 MacOS build: Not currently available
 
 ![wohmakert](wohmaker.png)
+
+**Version 1.5.c fixed exe**
+- Fixed license-related error on launch. Hopefully this time it won't devolve into madness again.
 
 **Version 1.5.b fixed exe**
 - Fixed license-related error on launch.
