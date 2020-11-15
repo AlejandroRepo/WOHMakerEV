@@ -61,7 +61,7 @@ import javafx.util.StringConverter;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import impl.org.controlsfx.autocompletion.SuggestionProvider;
 
-public class Controller implements Initializable {
+public class Controller  extends VBox implements Initializable {
 
     List<String> locationsList = Arrays.asList("downtown", "apartment", "school", "hospital", "seaside", "forest",
             "mansion", "schoolhospital", "seasideforest", "village", "atorasu", "athyola", "gozu", "ithotu");
@@ -100,7 +100,7 @@ public class Controller implements Initializable {
 
     List<String> visualEffectsList = Arrays.asList("none", "whiteflash", "bloodsplat");
 
-    public static final String VERSION = "1.5c";
+    public static final String VERSION = "1.5d";
 
     public static final String APPNAME = "WOHMaker";
 
