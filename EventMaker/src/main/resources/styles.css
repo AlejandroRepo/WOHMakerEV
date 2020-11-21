@@ -64,32 +64,62 @@
   -fx-font-family: Silver;
   -fx-text-fill: white;
   -fx-font-size: 28;
+    -fx-border-color: white;
+}
+
+.flavor .viewport{
+  -fx-background-color: black;
+  -fx-border-width: 0px;
+    -fx-border-color: white;
+  }
+
+.TextField {
+    -fx-min-height: 150px;
 }
 
 .flavor .content{
-  -fx-border-width: 2px;
-  -fx-border-color: white;
   -fx-background-color: black;
-  -fx-padding: 0 130 0 130;
+  -fx-max-width: 430px;
+  -fx-border-color: white;
+  -fx-border-width: 0px;
 }
 
 .flavor *.text {
     -fx-text-alignment: center;
     -fx-font-style: oblique;
+    -fx-font-size: 38;
     -fx-font-smoothing-type: lcd;
 }
+
+.imgDiag {
+    -fx-border-width: 5px;
+    -fx-background-color: white;
+    -fx-border-color: white;
+    -fx-border-radius: 50;
+}
+
+.optionText .viewport{
+  -fx-background-color: black;
+  -fx-border-width: 0px;
+  }
 
 .optionText {
   -fx-highlight-fill: #ff40ff;
   -fx-font-family: Silver;
   -fx-text-fill: white;
   -fx-font-size: 24;
+    -fx-border-color: white;
 }
 
 .optionText .content{
-  -fx-background-color: black;
-  -fx-border-width: 1px;
   -fx-border-color: white;
+  -fx-background-color: black;
+  -fx-border-width: 0px;
+  -fx-max-width: 377px;
+}
+
+.optionText .viewport{
+    -fx-border-color: white;
 }
 
 .optionText *.text {
@@ -158,7 +188,7 @@
 
 .silver {
   -fx-font-family: Silver;
-  -fx-font-size: 25;
+  -fx-font-size: 35;
   -fx-background-insets: 12,12,12;
 }
 

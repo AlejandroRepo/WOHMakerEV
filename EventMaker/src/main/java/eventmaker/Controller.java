@@ -21,6 +21,8 @@ import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
 
+import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -29,6 +31,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
@@ -48,8 +51,7 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -93,6 +95,9 @@ public class Controller  extends VBox implements Initializable {
     List<String> rewardsList = Arrays.asList("none", "experience", "stamina", "reason", "doom", "funds", "item",
             "itempool", "injury", "curse", "spell", "ally");
 
+
+
+
     List<String> extraRewardsList = Arrays.asList("none", "experience", "stamina", "reason", "doom");
 
     List<String> itemPools = Arrays.asList("mask", "book", "ring", "poor", "magicitem", "hardwareshop", "vendingshop",
@@ -100,7 +105,7 @@ public class Controller  extends VBox implements Initializable {
 
     List<String> visualEffectsList = Arrays.asList("none", "whiteflash", "bloodsplat");
 
-    public static final String VERSION = "1.5d";
+    public static final String VERSION = "1.6";
 
     public static final String APPNAME = "WOHMaker";
 
@@ -403,7 +408,13 @@ public class Controller  extends VBox implements Initializable {
     Tab tabSuccessA;
 
     @FXML
+    HBox boxImg;
+
+    @FXML
     Tab tabSuccessB;
+
+    @FXML
+    ImageView madTeacher;
 
     @FXML
     Tab tabSuccessC;
@@ -418,6 +429,12 @@ public class Controller  extends VBox implements Initializable {
     ImageView band2;
 
     @FXML
+    StackPane stack1;
+
+    @FXML
+    StackPane stack2;
+
+    @FXML
     VBox root;
 
     Dialog<Object> imageViewDialog = new Dialog<>();
@@ -426,39 +443,14 @@ public class Controller  extends VBox implements Initializable {
 
     static BooleanProperty smallScreenMode = new SimpleBooleanProperty(false);
 
-    boolean forceFileRefresh = true;
+    boolean forceFileRefresh = false;
 
     @Override
     public void initialize(final URL url, final ResourceBundle resourceBundle) {
 
         Font.loadFont(Controller.class.getResource("/Silver.ttf").toExternalForm(), 10);
 
-        this.comboRewards
-            .addAll(Arrays.asList(this.cmbRewardsA, this.cmbRewardsAF, this.cmbRewardsB, this.cmbRewardsBF,
-                    this.cmbRewardsC, this.cmbRewardsCF));
-        this.comboExtraRewards.addAll(Arrays.asList(this.cmbExtraRewardsA, this.cmbExtraRewardsAF,
-                this.cmbExtraRewardsB, this.cmbExtraRewardsBF,
-                this.cmbExtraRewardsC, this.cmbExtraRewardsCF));
-        this.txtRewardList.addAll(Arrays.asList(this.txtRewardA, this.txtRewardAF, this.txtRewardB, this.txtRewardBF,
-                this.txtRewardC, this.txtRewardCF));
-        this.comboVisual.addAll(Arrays.asList(this.cmbVisualA, this.cmbVisualAF, this.cmbVisualB, this.cmbVisualBF,
-                this.cmbVisualC, this.cmbVisualCF));
-        this.comboChecks.addAll(Arrays.asList(this.comboCheckA, this.comboCheckB, this.comboCheckC));
-        this.lblWarnings.addAll(Arrays.asList(this.lblAS, this.lblAF, this.lblBS, this.lblBD, this.lblCS, this.lblCF,
-                this.lblImgWarn, this.lblTooLong));
-        this.txtExtraRewards.addAll(
-                Arrays.asList(this.txtExtraRewardA, this.txtExtraRewardAF, this.txtExtraRewardB, this.txtExtraRewardBF,
-                        this.txtExtraRewardC, this.txtExtraRewardCF));
-
-        this.lblVersion.setText(VERSION);
-
-        this.imgBack.setManaged(false);
-
-        this.btnCLear.setGraphic(new ImageView(new Image(Controller.class.getResource("/erase.png").toExternalForm())));
-        this.btnLoadPic.setGraphic(new ImageView(new Image("/load.png")));
-        this.btnSaveUser.setGraphic(new ImageView("/save.png"));
-
-        this.txtPic.addEventFilter(MouseEvent.MOUSE_CLICKED, Event::consume);
+        prepareUI();
 
         this.readPrefs();
 
@@ -480,12 +472,93 @@ public class Controller  extends VBox implements Initializable {
                 }
             }
         });
+    }
 
+
+    Thread rotatingThread;
+
+    private void prepareUI() {
+
+        stack1.prefWidthProperty().bind(root.widthProperty());
+        stack2.prefWidthProperty().bind(root.widthProperty());
+        boxImg.widthProperty().addListener((ob,old,newValue) -> {
+            imgArt.setFitWidth(newValue.floatValue()>50? newValue.floatValue() : 50);
+        });
+
+        btnCLear.setGraphic(new ImageView(new Image(Controller.class.getResource("/refresh2.png").toExternalForm())));
+//
+//        rotatingThread = new Thread(() -> {
+//            while (true) {
+//                Platform.runLater(() -> {
+//                    madTeacher.setOpacity(0.65);
+//                    madTeacher.setImage(new Image(Controller.class.getResource("/help3.png").toExternalForm()));
+//                });
+//                try {
+//                    Thread.sleep(150);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                Platform.runLater(() -> {
+//                    madTeacher.setOpacity(1);
+//                    madTeacher.setImage(new Image(Controller.class.getResource("/help2.png").toExternalForm()));
+//                });
+//                try {
+//                    Thread.sleep(1000 * (new Random().nextInt(6)));
+//                } catch (InterruptedException end) {
+//                    Thread.interrupted();
+//                }
+//            }});
+//        rotatingThread.setDaemon(true);
+//        rotatingThread.start();
+
+
+
+        List<TextArea> textAreasToAdjust = Arrays.asList(textFlav, txtSuccessA,txtSuccessB,txtSuccessC,txtFailureA,txtFailureB,txtFailureC);
+        textAreasToAdjust.forEach(ta -> ta.widthProperty().addListener((ob, old, newValue) -> {
+            if (newValue.floatValue()>ta.getPrefWidth()){
+                ta.lookup(".content").setTranslateX(((newValue.floatValue() - ta.getPrefWidth()) /2));
+            } else {
+                ta.lookup(".content").setTranslateX(0);
+            }
+        }));
+
+        textFlav.widthProperty().addListener((ob,old,newValue) -> {
+            if (newValue.floatValue()>textFlav.getPrefWidth()){
+                textFlav.lookup(".content").setTranslateX(((newValue.floatValue() - textFlav.getPrefWidth()) /2));
+            } else {
+                textFlav.lookup(".content").setTranslateX(0);
+            }
+        });
+
+        this.comboRewards.addAll(Arrays.asList(this.cmbRewardsA, this.cmbRewardsAF, this.cmbRewardsB, this.cmbRewardsBF,
+                        this.cmbRewardsC, this.cmbRewardsCF));
+        this.comboExtraRewards.addAll(Arrays.asList(this.cmbExtraRewardsA, this.cmbExtraRewardsAF,
+                this.cmbExtraRewardsB, this.cmbExtraRewardsBF,
+                this.cmbExtraRewardsC, this.cmbExtraRewardsCF));
+        this.txtRewardList.addAll(Arrays.asList(this.txtRewardA, this.txtRewardAF, this.txtRewardB, this.txtRewardBF,
+                this.txtRewardC, this.txtRewardCF));
+        this.comboVisual.addAll(Arrays.asList(this.cmbVisualA, this.cmbVisualAF, this.cmbVisualB, this.cmbVisualBF,
+                this.cmbVisualC, this.cmbVisualCF));
+        this.comboChecks.addAll(Arrays.asList(this.comboCheckA, this.comboCheckB, this.comboCheckC));
+        this.lblWarnings.addAll(Arrays.asList(this.lblAS, this.lblAF, this.lblBS, this.lblBD, this.lblCS, this.lblCF,
+                this.lblImgWarn, this.lblTooLong));
+        this.txtExtraRewards.addAll(
+                Arrays.asList(this.txtExtraRewardA, this.txtExtraRewardAF, this.txtExtraRewardB, this.txtExtraRewardBF,
+                        this.txtExtraRewardC, this.txtExtraRewardCF));
+
+        this.lblVersion.setText(VERSION);
+
+        this.imgBack.setManaged(false);
+
+        this.btnLoadPic.setGraphic(new ImageView(new Image("/load.png")));
+        this.btnSaveUser.setGraphic(new ImageView("/save.png"));
+
+        this.txtPic.addEventFilter(MouseEvent.MOUSE_CLICKED, Event::consume);
     }
 
     void refreshChars() {
 
-        int dice = 0;
+        int dice;
         final List<ImageView> chars = Arrays.asList(this.imgGuiArt, this.imgGuiArt2, this.imgGuiArt3, this.imgGuiArt4);
 
         for (int i = 1; i < chars.size() + 1; i++) {
@@ -731,7 +804,7 @@ public class Controller  extends VBox implements Initializable {
             }
 
             try (final BufferedWriter writer = new BufferedWriter(new FileWriter(author))) {
-                writer.write(this.txtAuthor.getText() + System.lineSeparator() + this.txtAuthor.getText());
+                writer.write(this.txtAuthor.getText() + System.lineSeparator() + this.txtContact.getText());
                 this.btnSaveUser.setDisable(true);
             } catch (final IOException e) {
                 e.printStackTrace();
@@ -836,8 +909,12 @@ public class Controller  extends VBox implements Initializable {
                 imageView.setPreserveRatio(true);
                 imageView.setSmooth(false);
                 final VBox content = new VBox(5);
-                content.setAlignment(Pos.CENTER_RIGHT);
+                content.setAlignment(Pos.CENTER);;
+                content.setPadding(new Insets(15));
                 content.getChildren().add(imageView);
+                content.getStyleClass().add("imgDiag");
+                content.getStylesheets().add("styles.css");
+                content.setPrefSize(imageView.getFitWidth()+20,imageView.getFitHeight()+20);
                 this.imageViewDialog.getDialogPane().setContent(content);
                 this.imageViewDialog.show();
             } else {
@@ -978,7 +1055,7 @@ public class Controller  extends VBox implements Initializable {
                         this.imgBack.setVisible(!str.equals("enableHelp=true"));
                         this.helpAreatxt.setVisible(str.equals("enableHelp=true"));
                     }
-                    if (str.contains("forceRefresh")) {
+                    if (str.contains("forceRefresh=true")) {
                         this.forceFileRefresh = true;
                     }
                     if (str.contains("enableArts")) {
@@ -1067,23 +1144,14 @@ public class Controller  extends VBox implements Initializable {
             this.lblImgWarn.setVisible(false);
             this.chkBigArt.setIndeterminate(false);
             this.chkBigArt.setSelected(false);
-            this.imgArt.setFitWidth(279);
-            this.imgArt.setTranslateY(0);
-            this.imgArt.setTranslateX(0);
         } else if ((this.eventArt.getWidth() == 506 && this.eventArt.getHeight() == 220)) {
             this.lblImgWarn.setVisible(false);
             this.chkBigArt.setIndeterminate(false);
             this.chkBigArt.setSelected(true);
-            this.imgArt.setFitWidth(279);
-            this.imgArt.setTranslateY(40);
-            this.imgArt.setTranslateX(-10);
         } else {
             this.lblImgWarn.setVisible(true);
             this.chkBigArt.setSelected(false);
             this.chkBigArt.setIndeterminate(true);
-            this.imgArt.setFitWidth(279);
-            this.imgArt.setTranslateY(0);
-            this.imgArt.setTranslateX(0);
             if (this.eventArt.isError()) {
                 this.lblImgWarn.setText("Image couldn't be found!");
                 this.imgArt.setImage(new Image("/notfound.png"));
@@ -1120,16 +1188,20 @@ public class Controller  extends VBox implements Initializable {
                 this.helpAreatxt.setText("Shown on the upper-left part of the screen and mod menu.");
             }
         });
+
         this.textDesc.hoverProperty()
             .addListener(
                     inv -> this.helpAreatxt.setText("Shown only in the mod menu. \nSmall! around 25 chars maximum."));
+
         this.textFlav.hoverProperty()
             .addListener(inv -> this.helpAreatxt
                 .setText(
                         "Positioning'll be roughly the same as in woh. \nLine breaks will be respected."));
+
         this.txtAuthor.hoverProperty()
             .addListener(
                     inv -> this.helpAreatxt.setText("Shown in the lower-left part of the event screen, and mod menu."));
+
         this.txtContact.hoverProperty()
             .addListener(inv -> this.helpAreatxt
                 .setText("Not shown in-game. A way for old god panstasz to contact you shall it be necessary."));
@@ -1233,6 +1305,7 @@ public class Controller  extends VBox implements Initializable {
         // reads author data, or generates one
 
         final File author = Paths.get(USERHOME, APPNAME, "author.txt").toFile();
+
         if (!author.exists() || this.forceFileRefresh) {
             try (final BufferedWriter writer = new BufferedWriter(new FileWriter(author))) {
                 writer.write(System.getProperty("user.name") + System.lineSeparator() + "@"

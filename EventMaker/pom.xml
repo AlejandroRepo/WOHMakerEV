@@ -6,7 +6,7 @@
 
     <groupId>com.dae</groupId>
     <artifactId>EventViewer</artifactId>
-    <version>1.5b</version>
+    <version>1.5</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -38,7 +38,6 @@
             <artifactId>javafx-swing</artifactId>
             <version>14.0.1</version>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -55,10 +54,11 @@
                     <release>${maven.compiler.release}</release>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.3</version>
+                <version>0.0.4</version>
 
                 <configuration>
                     <release>${maven.compiler.release}</release>
@@ -66,10 +66,7 @@
                     <launcher>Launch.WOHMaker</launcher>
                     <commandlineArgs>--add-exports=org.controlsfx.controls/impl.org.controlsfx.autocompletion=EventMaker</commandlineArgs>
                     <commandlineArgs>S:\Descargas\WOHMaker1.3b\dae_village_box_B.ito</commandlineArgs>
-                    <compilerArgs>
-                        <compilerArg>--add-exports</compilerArg>
-                        <compilerArg>org.controlsfx.controls/impl.org.controlsfx.autocompletion=EventMaker</compilerArg>
-                    </compilerArgs>
+
                     <options>
                         <option>--add-exports</option>
                         <option>org.controlsfx.controls/impl.org.controlsfx.autocompletion=EventMaker</option>
